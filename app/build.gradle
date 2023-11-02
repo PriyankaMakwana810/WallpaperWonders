@@ -7,8 +7,8 @@ plugins {
 }
 
 android {
-    namespace 'com.tridhya.basesetupnew'
-    compileSdk 33
+    namespace 'com.techiq.wallpaperwonders'
+    compileSdk 34
 
     signingConfigs {
         config {
@@ -19,9 +19,9 @@ android {
         }
     }
     defaultConfig {
-        applicationId "com.tridhya.basesetupnew"
+        applicationId "com.techiq.wallpaperwonders"
         minSdk 24
-        targetSdk 33
+        targetSdk 34
         versionCode 1
         versionName "1.0"
 
@@ -61,7 +61,7 @@ android {
             excludes += '/META-INF/{AL2.0,LGPL2.1}'
         }
     }
-    applicationVariants.all{
+    applicationVariants.configureEach {
             // this method is use to rename your all apk weather
             // it may be signed or unsigned(debug apk)
         variant ->
@@ -71,7 +71,7 @@ android {
                 output->
                     // on below line we are adding version name to
                     // our .apk file along with the app name
-                    def name = "BaseSetup(${variant.versionName}).apk"
+                    def name = "wallpaerwonders(${variant.versionName}).apk"
                     // on below line we are setting the
                     // outputFile Name to our apk file
                     output.outputFileName = name

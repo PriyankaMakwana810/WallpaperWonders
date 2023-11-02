@@ -15,17 +15,14 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:usesCleartextTraffic="true"
         android:theme="@style/Theme.BriefCaseSampleApp"
+        android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
             android:name=".design.register.RegisterActivity"
             android:exported="false" />
         <activity
             android:name=".design.signin.SigninActivity"
-            android:exported="false" />
-        <activity
-            android:name=".design.login.LoginActivity"
             android:exported="false" />
         <activity
             android:name=".design.splash.SplashActivity"

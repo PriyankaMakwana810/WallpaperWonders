@@ -8,15 +8,15 @@
 
         <variable
             name="preference"
-            type="com.tridhya.basesetupnew.utils.PrefUtils" />
+            type="com.techiq.wallpaperwonders.utils.PrefUtils" />
 
         <variable
             name="viewModel"
-            type="com.tridhya.basesetupnew.design.signin.SigninViewModel" />
+            type="com.techiq.wallpaperwonders.design.signin.SigninViewModel" />
 
         <variable
             name="constant"
-            type="com.tridhya.basesetupnew.utils.Constant" />
+            type="com.techiq.wallpaperwonders.utils.Constant" />
 
     </data>
 

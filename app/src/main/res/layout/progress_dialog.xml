@@ -19,7 +19,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.tridhya.basesetupnew.utils.CircularProgressBar
+    <com.techiq.wallpaperwonders.utils.CircularProgressBar
         android:id="@+id/ivProgressDialogInnerCircle"
         android:layout_width="@dimen/_30sdp"
         android:layout_height="@dimen/_30sdp"
