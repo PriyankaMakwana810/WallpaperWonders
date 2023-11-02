@@ -9,7 +9,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import com.techiq.wallpaperwonders.R
 
-open class BaseFragment : Fragment(){
+open class BaseFragment : Fragment() {
     lateinit var mContext: Context
     lateinit var mActivity: Activity
 

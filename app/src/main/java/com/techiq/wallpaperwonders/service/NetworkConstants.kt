@@ -15,12 +15,15 @@ object NetworkConstants {
             ).has(key)
         ) JSONObject(preferences.getString(TRANSLATE_DATA)).optString(key)
         else key
+
     object ApiUrl {
         const val HOME_URL = "https://www.google.com/"
         const val LOGIN_URL = "https://linxsystems.flowgear.net/"
+
         //  const val SIGNIN_URL = "https://dummyjson.com/"
         const val SIGNIN_URL = "http://restapi.adequateshop.com/api/authaccount/"
     }
+
     object ApiCode {
         const val SUCCESS_CODE = 200
         const val INTERNAL_ERROR_CODE = 500
@@ -40,8 +43,9 @@ object NetworkConstants {
         const val NO_NETWORK = "Please check your Internet Connection"
         const val REQUEST_PARAMETER_MISSING = "Some data is missing"
     }
+
     fun getApiStateResponseStatus(
-        responseState: ResponseState?, prefUtils: PrefUtils, funListener: (Int, Any?) -> Any?
+        responseState: ResponseState?, prefUtils: PrefUtils, funListener: (Int, Any?) -> Any?,
     ): ApiState {
         responseState.apply {
             try {
@@ -54,7 +58,7 @@ object NetworkConstants {
 
                     else -> {
                         if (isNetworkAvailable == false) {
-                           // val getDataFromDatabase = funListener.invoke(Constant.GET_DATA_IN_DATABASE, null)
+                            // val getDataFromDatabase = funListener.invoke(Constant.GET_DATA_IN_DATABASE, null)
 //                            if (getDataFromDatabase != null) {
 //                                Constant.logI(
 //                                    "TAG",
@@ -64,19 +68,19 @@ object NetworkConstants {
 //                                apiStatus = ApiCode.SUCCESS_CODE
 //
 //                            } else {
-                                Constant.smallToastWithContext(
-                                    parentView!!.context, ErrorMsg.NO_NETWORK
-                                )
-                                return ApiState(
-                                    localError = ErrorMsg.NO_NETWORK, localStatus = Status.ERROR
-                                )
+                            Constant.smallToastWithContext(
+                                parentView!!.context, ErrorMsg.NO_NETWORK
+                            )
+                            return ApiState(
+                                localError = ErrorMsg.NO_NETWORK, localStatus = Status.ERROR
+                            )
 
                         }
                         when (apiStatus) {
                             ApiCode.SUCCESS_CODE -> {
                                 if (isNetworkAvailable == true) {
                                     Constant.logI("TAG", "getApiStateResponseStatus: delete")
-                                   // funListener.invoke(Constant.DELETE_DATA_IN_DATABASE, null)
+                                    // funListener.invoke(Constant.DELETE_DATA_IN_DATABASE, null)
                                     responseBody?.let {
                                         Constant.logI("TAG", "getApiStateResponseStatus: insert")
 //                                        funListener.invoke(
@@ -172,7 +176,7 @@ object NetworkConstants {
 
 
     fun getApiStateResponseStatus(
-        responseState: ResponseState?, prefUtils: PrefUtils
+        responseState: ResponseState?, prefUtils: PrefUtils,
     ): ApiState {
         responseState.apply {
             when (this) {
@@ -193,15 +197,17 @@ object NetworkConstants {
                         )
                     }
                     when (apiStatus) {
-                        Log.d("TAG", "getApiStateResponseStatus: "+"apistatus"+apiStatus+"resbody"+responseBody),
+                        Log.d(
+                            "TAG",
+                            "getApiStateResponseStatus: " + "apistatus" + apiStatus + "resbody" + responseBody
+                        ),
 
 
-
-
-                        ApiCode.SUCCESS_CODE -> {
+                        ApiCode.SUCCESS_CODE,
+                        -> {
                             if (parentView != null && isSuccessMessageShow == true) Constant.smallToastWithContext(
                                 parentView.context,
-                               getMessageFromApi(message.toString(), prefUtils),
+                                getMessageFromApi(message.toString(), prefUtils),
 
                                 )
                             return ApiState(
@@ -236,10 +242,11 @@ object NetworkConstants {
                                 responseBody
                             )
                         }
+
                         ApiCode.FAILURE_CODE_202 -> {
                             if (parentView != null && isFailureMessageShow == true) Constant.smallToastWithContext(
                                 parentView.context,
-                                 getMessageFromApi(message.toString(), prefUtils),
+                                getMessageFromApi(message.toString(), prefUtils),
 
                                 )
                             return ApiState(
@@ -426,7 +433,6 @@ object NetworkConstants {
 //    }
 
 
-
 //    fun setProgressText(
 //        context: Context,
 //        showProgress: String = "",
@@ -471,7 +477,6 @@ object NetworkConstants {
 //            }
 //        }
 //    }
-
 
 
 //

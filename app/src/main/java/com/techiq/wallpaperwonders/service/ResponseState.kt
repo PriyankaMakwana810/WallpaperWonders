@@ -11,5 +11,5 @@ class ResponseState(
     val parentView: View? = null,
     val isSuccessMessageShow: Boolean? = false,
     val isFailureMessageShow: Boolean? = true,
-    val isNetworkAvailable: Boolean? = true
+    val isNetworkAvailable: Boolean? = true,
 )

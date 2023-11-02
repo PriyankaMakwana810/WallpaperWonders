@@ -1,6 +1,23 @@
 <resources>
     <string name="app_name">Wallpaper Wonders</string>
 
+<!--    lables-->
+    <string name="set">Set</string>
+    <string name="download">Download</string>
+    <string name="search">Search</string>
+    <string name="portrait">Portrait</string>
+    <string name="full_hd_s">Full HD, %s</string>
+    <string name="full_hd">Full HD</string>
+    <string name="landscape">Landscape</string>
+    <string name="delete">Delete</string>
+    <string name="lock_screen">Lock Screen</string>
+    <string name="powered_by">Powered By</string>
+
+
+    <string name="no_download_message">No downloads yet.</string>
+    <string name="something_is_broken_n_please_try_again">Something is broken\n tap here to try again</string>
+
+
     <string name="briefcase_sampleapp">ISellIt</string>
     <string name="lets_get_started">Let\'s get started</string>
     <string name="username">Username</string>
@@ -25,5 +42,6 @@
     <string name="you_have_to_grant_us_your_device_media_access">You have to grant us your device Media Access</string>
     <string name="app_media_settings">App Media Settings</string>
     <string name="your_device_version_not_need_for_this_permission">Your Device Version not need for this permission</string>
+    <string name="unable_to_search_n_please_try_with_different_keyword">Unable to search \n Please try with different keyword</string>
 
 </resources>

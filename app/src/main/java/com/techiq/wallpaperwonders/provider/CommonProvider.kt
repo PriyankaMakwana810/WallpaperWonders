@@ -34,7 +34,6 @@ import javax.inject.Singleton
 object CommonProvider {
 
 
-
     @Singleton
     @Named(SHARED_COMMON)
     @Provides
@@ -44,10 +43,6 @@ object CommonProvider {
     @Singleton
     @Provides
     fun providesPropertyChangeRegistry(): PropertyChangeRegistry = PropertyChangeRegistry()
-
-
-
-
 
 
     @Singleton
@@ -63,7 +58,7 @@ object CommonProvider {
 
         @Named(Constant.GSON) gson: Gson,
 
-        @Named(SHARED_COMMON) preference: PrefUtils
+        @Named(SHARED_COMMON) preference: PrefUtils,
     ): OkHttpClient {
         val okhttp = OkHttpClient.Builder().connectTimeout(60, TimeUnit.SECONDS)
             .readTimeout(60, TimeUnit.SECONDS).writeTimeout(60, TimeUnit.SECONDS)

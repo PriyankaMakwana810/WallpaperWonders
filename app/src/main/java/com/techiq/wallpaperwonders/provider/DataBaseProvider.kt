@@ -18,9 +18,8 @@ class DataBaseProvider {
     @Provides
     @Singleton
     fun providesUserDatabase(
-        userDatabaseBuilder: RoomDatabase.Builder<UserDatabase>
+        userDatabaseBuilder: RoomDatabase.Builder<UserDatabase>,
     ): UserDatabase = userDatabaseBuilder.build()
-
 
 
 }

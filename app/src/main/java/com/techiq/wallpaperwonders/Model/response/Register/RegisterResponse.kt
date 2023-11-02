@@ -9,5 +9,5 @@ data class RegisterResponse(
     @SerializedName("data")
     val `data`: Data,
     @SerializedName("message")
-    val message: String
+    val message: String,
 )

@@ -1,4 +1,4 @@
-package com.techiq.wallpaperwonders.utils;
+package com.techiq.wallpaperwonders.utils
 
 import android.content.Context
 import android.content.Context.MODE_PRIVATE
@@ -50,7 +50,6 @@ class PrefUtils(private val context: Context) {
     fun getString(key: String): String {
         return prefs.getString(key, "") ?: ""
     }
-
 
 
     /**

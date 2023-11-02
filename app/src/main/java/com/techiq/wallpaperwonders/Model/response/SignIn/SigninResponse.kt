@@ -12,5 +12,5 @@ data class SigninResponse(
     @SerializedName("message")
     val message: String,
     @SerializedName("ModelState")
-    val modelState: ModelState
+    val modelState: ModelState,
 )

@@ -22,19 +22,34 @@ class SpannableText private constructor(private val builder: Builder) {
             // Set color span
             if (spanData.textColor != null) {
                 val colorSpan = ForegroundColorSpan(spanData.textColor)
-                spannableStringBuilder.setSpan(colorSpan, start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+                spannableStringBuilder.setSpan(
+                    colorSpan,
+                    start,
+                    end,
+                    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+                )
             }
 
             // Set underline span
             if (spanData.underline) {
                 val underlineSpan = UnderlineSpan()
-                spannableStringBuilder.setSpan(underlineSpan, start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+                spannableStringBuilder.setSpan(
+                    underlineSpan,
+                    start,
+                    end,
+                    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+                )
             }
 
             // Set bold span
             if (spanData.bold) {
                 val boldSpan = TypefaceSpanCompat(Typeface.BOLD)
-                spannableStringBuilder.setSpan(boldSpan, start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+                spannableStringBuilder.setSpan(
+                    boldSpan,
+                    start,
+                    end,
+                    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+                )
             }
 
             // Set click listener span
@@ -44,7 +59,12 @@ class SpannableText private constructor(private val builder: Builder) {
                         spanData.clickListener.onClick(view)
                     }
                 }
-                spannableStringBuilder.setSpan(clickableSpan, start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+                spannableStringBuilder.setSpan(
+                    clickableSpan,
+                    start,
+                    end,
+                    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+                )
             }
         }
 
@@ -57,7 +77,7 @@ class SpannableText private constructor(private val builder: Builder) {
         val textColor: Int? = null,
         val underline: Boolean = false,
         val bold: Boolean = false,
-        val clickListener: View.OnClickListener? = null
+        val clickListener: View.OnClickListener? = null,
     )
 
     class Builder(val text: CharSequence) {

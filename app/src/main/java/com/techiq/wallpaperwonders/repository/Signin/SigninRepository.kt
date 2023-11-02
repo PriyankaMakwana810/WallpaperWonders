@@ -1,12 +1,12 @@
 package com.techiq.wallpaperwonders.repository.Signin
 
 import android.view.View
+import com.techiq.wallpaperwonders.Model.request.LoginRequest
 import com.techiq.wallpaperwonders.service.ApiClient
 import com.techiq.wallpaperwonders.service.ApiState
 import com.techiq.wallpaperwonders.service.NetworkConstants
 import com.techiq.wallpaperwonders.service.NetworkConstants.getApiStateResponseStatus
 import com.techiq.wallpaperwonders.service.ResponseState
-import com.techiq.wallpaperwonders.Model.request.LoginRequest
 import com.techiq.wallpaperwonders.utils.Constant
 import com.techiq.wallpaperwonders.utils.PrefUtils
 import retrofit2.Response
@@ -22,7 +22,7 @@ class SigninRepository @Inject constructor(
 
         isSuccessMessageShow: Boolean,
         isFailureMessageShow: Boolean,
-        loginRequest: LoginRequest
+        loginRequest: LoginRequest,
     ): ApiState {
 
         val responseData: ResponseState?
@@ -30,7 +30,8 @@ class SigninRepository @Inject constructor(
             val response = apiClient.signin(loginRequest)
             val responseBody = response.body()
 
-            val responseMessage = response.message() ?: NetworkConstants.ErrorMsg.SOMETHING_WENT_WRONG
+            val responseMessage =
+                response.message() ?: NetworkConstants.ErrorMsg.SOMETHING_WENT_WRONG
             responseData =
                 ResponseState(
                     apiStatus = response.code(),

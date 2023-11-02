@@ -3,11 +3,11 @@ package com.techiq.wallpaperwonders.design.register
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
+import com.techiq.wallpaperwonders.Model.response.Register.RegisterResponse
 import com.techiq.wallpaperwonders.R
 import com.techiq.wallpaperwonders.base.ActivityBase
-import com.techiq.wallpaperwonders.service.Status
 import com.techiq.wallpaperwonders.databinding.ActivityRegisterBinding
-import com.techiq.wallpaperwonders.Model.response.Register.RegisterResponse
+import com.techiq.wallpaperwonders.service.Status
 import com.techiq.wallpaperwonders.utils.Constant
 import com.techiq.wallpaperwonders.utils.Constant.smallToast
 
@@ -22,6 +22,7 @@ class RegisterActivity : ActivityBase() {
     private val registerPassword: String? by lazy {
         intent.extras?.getString(Constant.INTENT_LOGIN_PASSWORD) ?: ""
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.apply {
@@ -41,12 +42,14 @@ class RegisterActivity : ActivityBase() {
             observer()
         }
     }
+
     private fun clickListener() {
 
     }
+
     private fun observer() {
-        viewModelRegister.registerUserResponse.observe(this){
-            Log.d("TAG", "SigninResponseData: "+it.response.toString())
+        viewModelRegister.registerUserResponse.observe(this) {
+            Log.d("TAG", "SigninResponseData: " + it.response.toString())
             when (it.localStatus) {
                 Status.SUCCESS -> {
                     val response = it.response as RegisterResponse
@@ -54,9 +57,9 @@ class RegisterActivity : ActivityBase() {
                     if (response != null) {
                         registerResponse = response
 
-                        if (it.response.code==0){
+                        if (it.response.code == 0) {
                             smallToast(it.response.data.email)
-                        }else{
+                        } else {
                             smallToast(it.response.message)
                         }
 
@@ -67,7 +70,6 @@ class RegisterActivity : ActivityBase() {
                         smallToast(getString(R.string.wrongCredential))
                     }
                 }
-
 
 
                 Status.ERROR -> {

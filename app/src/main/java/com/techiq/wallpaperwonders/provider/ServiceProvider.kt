@@ -30,7 +30,7 @@ object ServiceProvider {
     @Provides
     @Named(BASE_URL)
     fun provideBaseUrl(): String =
-     HOME_URL
+        HOME_URL
 
     @ActivityRetainedScoped
     @Provides
@@ -40,12 +40,11 @@ object ServiceProvider {
         @Named(SERVICE_FOR_LOGIN_GSON) serviceForLogin: ApiInterface,
         @Named(SERVICE_WITH_GSON_SIGNIN) serviceForSignin: ApiInterface,
 
-    ): ApiClient = ApiClient(
+        ): ApiClient = ApiClient(
         serviceForSignIn = serviceForSignin,
 
 
-
-    )
+        )
 
     @Provides
     @Named(SERVICE_WITH_GSON)
@@ -53,7 +52,7 @@ object ServiceProvider {
     fun providesApiService(
         @Named(OK_HTTPS) okHttpClient: OkHttpClient,
         @Named(BASE_URL) baseUrl: String,
-        @Named(GSON) gson: Gson
+        @Named(GSON) gson: Gson,
     ): ApiInterface {
 
         return Retrofit.Builder().baseUrl(baseUrl).client(okHttpClient)

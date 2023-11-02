@@ -59,8 +59,6 @@ import kotlin.system.exitProcess
 @SuppressLint("SdCardPath", "StaticFieldLeak")
 object Constant {
 
-
-
     const val SHARED_COMMON = "SharedCommon"
     const val BASE_URL = "BaseUrl"
     const val API_CLIENT = "ApiClient"

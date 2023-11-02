@@ -13,12 +13,12 @@ interface ApiInterface {
 
     @POST("login")
     suspend fun signin(
-        @Body loginRequest: LoginRequest
+        @Body loginRequest: LoginRequest,
     ): Response<SigninResponse>
 
 
     @POST("registration")
     suspend fun register(
-        @Body registerationRequest: RegisterationRequest
+        @Body registerationRequest: RegisterationRequest,
     ): Response<RegisterResponse>
 }

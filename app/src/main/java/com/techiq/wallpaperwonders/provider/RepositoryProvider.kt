@@ -1,9 +1,8 @@
 package com.techiq.wallpaperwonders.provider
 
 import com.google.gson.Gson
-
-import com.techiq.wallpaperwonders.service.ApiClient
 import com.techiq.wallpaperwonders.repository.Signin.SigninRepository
+import com.techiq.wallpaperwonders.service.ApiClient
 import com.techiq.wallpaperwonders.utils.Constant.API_CLIENT
 import com.techiq.wallpaperwonders.utils.Constant.GSON
 import com.techiq.wallpaperwonders.utils.Constant.SHARED_COMMON
@@ -28,8 +27,8 @@ object RepositoryProvider {
         @Named(API_CLIENT) client: ApiClient,
         @Named(SHARED_COMMON) prefUtils: PrefUtils,
 
-    ): SigninRepository = SigninRepository(
-         client, prefUtils
+        ): SigninRepository = SigninRepository(
+        client, prefUtils
     )
 
 

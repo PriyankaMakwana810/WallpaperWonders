@@ -11,5 +11,5 @@ data class Data(
     @SerializedName("Name")
     val name: String,
     @SerializedName("Token")
-    val token: String
+    val token: String,
 )

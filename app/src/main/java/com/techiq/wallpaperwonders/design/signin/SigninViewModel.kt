@@ -11,11 +11,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.techiq.wallpaperwonders.BR
+import com.techiq.wallpaperwonders.Model.request.LoginRequest
 import com.techiq.wallpaperwonders.R
+import com.techiq.wallpaperwonders.repository.Signin.SigninRepository
 import com.techiq.wallpaperwonders.service.ApiState
 import com.techiq.wallpaperwonders.service.Status
-import com.techiq.wallpaperwonders.repository.Signin.SigninRepository
-import com.techiq.wallpaperwonders.Model.request.LoginRequest
 import com.techiq.wallpaperwonders.utils.Constant
 import com.techiq.wallpaperwonders.utils.PrefUtils
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -27,7 +27,7 @@ import javax.inject.Named
 class SigninViewModel @Inject constructor(
     val repository: SigninRepository,
     private val propertyChangeRegistry: PropertyChangeRegistry,
-    @Named(Constant.SHARED_COMMON) private val sharedPreferences: PrefUtils
+    @Named(Constant.SHARED_COMMON) private val sharedPreferences: PrefUtils,
 ) : ViewModel(), Observable {
     val parentView: ObservableField<View> = ObservableField()
     private val _signinUserResponse: MutableLiveData<ApiState> = MutableLiveData()

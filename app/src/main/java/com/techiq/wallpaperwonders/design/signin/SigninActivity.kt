@@ -5,12 +5,12 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
+import com.techiq.wallpaperwonders.Model.response.SignIn.SigninResponse
 import com.techiq.wallpaperwonders.R
 import com.techiq.wallpaperwonders.base.ActivityBase
-import com.techiq.wallpaperwonders.service.Status
 import com.techiq.wallpaperwonders.databinding.ActivitySigninBinding
 import com.techiq.wallpaperwonders.design.register.RegisterActivity
-import com.techiq.wallpaperwonders.Model.response.SignIn.SigninResponse
+import com.techiq.wallpaperwonders.service.Status
 import com.techiq.wallpaperwonders.utils.Constant
 import com.techiq.wallpaperwonders.utils.Constant.smallToast
 
@@ -63,9 +63,9 @@ class SigninActivity : ActivityBase(), View.OnClickListener {
                     if (response != null) {
                         signinResponse = response
 
-                        if (it.response.code==0){
+                        if (it.response.code == 0) {
                             smallToast(it.response.data.email)
-                        }else{
+                        } else {
                             smallToast(it.response.message)
                         }
 
@@ -94,8 +94,8 @@ class SigninActivity : ActivityBase(), View.OnClickListener {
     }
 
     override fun onClick(view: View?) {
-        when(view?.id){
-            R.id.btnRegister->{
+        when (view?.id) {
+            R.id.btnRegister -> {
                 val i = Intent(this@SigninActivity, RegisterActivity::class.java)
                 startActivity(i)
 

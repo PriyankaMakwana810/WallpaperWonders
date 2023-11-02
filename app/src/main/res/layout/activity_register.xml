@@ -1,7 +1,6 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    >
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -24,6 +23,7 @@
         android:layout_height="match_parent"
         android:background="@color/white"
         tools:context=".design.login.LoginActivity">
+
         <androidx.core.widget.NestedScrollView
             android:id="@+id/nsvParent"
             android:layout_width="match_parent"
@@ -35,9 +35,8 @@
                 android:id="@+id/clParent"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
                 android:layout_marginTop="@dimen/_80sdp"
-                >
+                android:orientation="vertical">
 
                 <ImageView
                     android:id="@+id/ivLogo"
@@ -47,21 +46,21 @@
                     android:layout_marginBottom="@dimen/_50sdp"
                     android:contentDescription="@string/login"
                     android:src="@mipmap/ic_launcher"
-                    app:layout_constraintBottom_toTopOf="@+id/username"
-                    />
+                    app:layout_constraintBottom_toTopOf="@+id/username" />
+
                 <EditText
                     android:id="@+id/etName"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_marginLeft="@dimen/_20sdp"
-                    android:layout_marginRight="@dimen/_20sdp"
-
-                    android:hint="Name"
-                    android:text="@={viewModel.namelXml}"
-                    android:selectAllOnFocus="true"
                     android:layout_marginTop="@dimen/_50sdp"
+
+                    android:layout_marginRight="@dimen/_20sdp"
                     android:background="@drawable/ic_white_background_edit_text"
+                    android:hint="Name"
                     android:paddingLeft="@dimen/_20sdp"
+                    android:selectAllOnFocus="true"
+                    android:text="@={viewModel.namelXml}"
 
                     />
 
@@ -70,15 +69,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_marginLeft="@dimen/_20sdp"
-                    android:layout_marginRight="@dimen/_20sdp"
-
-                    android:hint="Email"
-                    android:text="@={viewModel.emailXml}"
-                    android:inputType="textEmailAddress"
-                    android:selectAllOnFocus="true"
                     android:layout_marginTop="@dimen/_30sdp"
+                    android:layout_marginRight="@dimen/_20sdp"
                     android:background="@drawable/ic_white_background_edit_text"
+                    android:hint="Email"
+                    android:inputType="textEmailAddress"
                     android:paddingLeft="@dimen/_20sdp"
+                    android:selectAllOnFocus="true"
+                    android:text="@={viewModel.emailXml}"
 
                     />
 
@@ -87,33 +85,27 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_marginLeft="@dimen/_20sdp"
-                    android:layout_marginRight="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/_30sdp"
 
-                    android:hint="@string/password"
+                    android:layout_marginRight="@dimen/_20sdp"
                     android:background="@drawable/ic_white_background_edit_text"
-                    android:paddingLeft="@dimen/_20sdp"
+                    android:hint="@string/password"
                     android:imeOptions="actionDone"
                     android:inputType="textPassword"
+                    android:paddingLeft="@dimen/_20sdp"
                     android:selectAllOnFocus="true"
-                    android:text="@={viewModel.passwordXml}"
-                    android:layout_marginTop="@dimen/_30sdp"/>
+                    android:text="@={viewModel.passwordXml}" />
 
 
                 <Button
                     android:id="@+id/login"
-                    android:gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:onClick="@{() -> viewModel.registerUser()}"
                     android:layout_gravity="center"
                     android:layout_marginTop="@dimen/_50sdp"
-
-                    android:text="@string/register"
-
-                    />
-
-
-
+                    android:gravity="center"
+                    android:onClick="@{() -> viewModel.registerUser()}"
+                    android:text="@string/register" />
 
 
             </LinearLayout>

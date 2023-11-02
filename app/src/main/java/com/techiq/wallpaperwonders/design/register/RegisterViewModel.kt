@@ -11,11 +11,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.techiq.wallpaperwonders.BR
+import com.techiq.wallpaperwonders.Model.request.RegisterationRequest
 import com.techiq.wallpaperwonders.R
+import com.techiq.wallpaperwonders.repository.Register.RegisterRepository
 import com.techiq.wallpaperwonders.service.ApiState
 import com.techiq.wallpaperwonders.service.Status
-import com.techiq.wallpaperwonders.repository.Register.RegisterRepository
-import com.techiq.wallpaperwonders.Model.request.RegisterationRequest
 import com.techiq.wallpaperwonders.utils.Constant
 import com.techiq.wallpaperwonders.utils.PrefUtils
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -27,7 +27,7 @@ import javax.inject.Named
 class RegisterViewModel @Inject constructor(
     val repository: RegisterRepository,
     private val propertyChangeRegistry: PropertyChangeRegistry,
-    @Named(Constant.SHARED_COMMON) private val sharedPreferences: PrefUtils
+    @Named(Constant.SHARED_COMMON) private val sharedPreferences: PrefUtils,
 ) : ViewModel(), Observable {
     val parentView: ObservableField<View> = ObservableField()
     private val _registerUserResponse: MutableLiveData<ApiState> = MutableLiveData()
@@ -95,21 +95,26 @@ class RegisterViewModel @Inject constructor(
         }
 
         Constant.showProgress(parentView.get()!!.context)
-        val registerationRequest: RegisterationRequest = RegisterationRequest(getEmailXml(),getNamelXml(), getPasswordXml())
+        val registerationRequest: RegisterationRequest =
+            RegisterationRequest(getEmailXml(), getNamelXml(), getPasswordXml())
         viewModelScope.launch {
             val response = repository.userRegister(
                 parent = parentView.get(),
-                registerationRequest=registerationRequest,
+                registerationRequest = registerationRequest,
                 isSuccessMessageShow = false,
                 isFailureMessageShow = true
             )
             launch {
-                Log.d("TAG", "getApiStateResponseStatus: "+"inside viemodel"+response.response.toString())
+                Log.d(
+                    "TAG",
+                    "getApiStateResponseStatus: " + "inside viemodel" + response.response.toString()
+                )
                 Constant.dismissProgress(parentView.get()!!.context)
                 _registerUserResponse.postValue(response)
             }
         }
     }
+
     override fun addOnPropertyChangedCallback(callback: Observable.OnPropertyChangedCallback?) {
         propertyChangeRegistry.add(callback)
     }

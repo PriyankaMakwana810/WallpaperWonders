@@ -7,5 +7,5 @@ data class errorres(
     @SerializedName("Message")
     val message: String,
     @SerializedName("ModelState")
-    val modelState: ModelState
+    val modelState: ModelState,
 )
