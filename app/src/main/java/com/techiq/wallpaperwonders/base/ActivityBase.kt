@@ -15,25 +15,18 @@ import javax.inject.Inject
 import javax.inject.Named
 
 @AndroidEntryPoint
-@Suppress("UNCHECKED_CAST")
 open class ActivityBase : DataBindingActivity() {
     private val tagName: String = javaClass.simpleName
-
 
     @Inject
     @Named(SHARED_COMMON)
     lateinit var sharedPref: PrefUtils
 
-
     private fun initBaseComponants() {
-
-
     }
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         initBaseComponants()
 
     }
@@ -58,7 +51,6 @@ open class ActivityBase : DataBindingActivity() {
             finishAffinity()
         }
     }
-
 
     private fun isLocationEnabled(): Boolean {
         val locationManager = getSystemService(LOCATION_SERVICE) as LocationManager

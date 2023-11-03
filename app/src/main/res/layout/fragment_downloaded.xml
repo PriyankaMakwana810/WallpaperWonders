@@ -40,7 +40,7 @@
                     android:text="@string/no_download_message"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_14sdp"
-                    app:fontPath="@string/font_Poppins_Regular" />
+                    android:fontFamily="@font/poppins_regular"/>
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 

@@ -22,7 +22,7 @@
             android:name=".FullScreenImageActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".design.main.MainActivity"
             android:exported="false" />
         <activity
             android:name=".design.register.RegisterActivity"
