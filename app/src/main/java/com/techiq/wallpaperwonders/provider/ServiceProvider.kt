@@ -54,7 +54,6 @@ object ServiceProvider {
         @Named(BASE_URL) baseUrl: String,
         @Named(GSON) gson: Gson,
     ): ApiInterface {
-
         return Retrofit.Builder().baseUrl(baseUrl).client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create(gson)).build()
             .create(ApiInterface::class.java)

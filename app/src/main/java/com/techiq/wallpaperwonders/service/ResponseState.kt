@@ -6,7 +6,7 @@ import retrofit2.Response
 class ResponseState(
     var apiStatus: Any? = null,
     val message: Any? = null,
-    val response: Response<Any>? = null,
+    val response: Response<*>? = null,
     var responseBody: Any? = null,
     val parentView: View? = null,
     val isSuccessMessageShow: Boolean? = false,

@@ -3,7 +3,7 @@ package com.techiq.wallpaperwonders.repository.Register
 import android.util.Log
 import android.view.View
 import com.google.gson.Gson
-import com.techiq.wallpaperwonders.Model.request.RegisterationRequest
+import com.techiq.wallpaperwonders.model.request.RegisterationRequest
 import com.techiq.wallpaperwonders.service.ApiClient
 import com.techiq.wallpaperwonders.service.ApiState
 import com.techiq.wallpaperwonders.service.NetworkConstants

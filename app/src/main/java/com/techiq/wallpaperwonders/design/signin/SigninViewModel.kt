@@ -11,7 +11,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.techiq.wallpaperwonders.BR
-import com.techiq.wallpaperwonders.Model.request.LoginRequest
+import com.techiq.wallpaperwonders.model.request.LoginRequest
 import com.techiq.wallpaperwonders.R
 import com.techiq.wallpaperwonders.repository.Signin.SigninRepository
 import com.techiq.wallpaperwonders.service.ApiState

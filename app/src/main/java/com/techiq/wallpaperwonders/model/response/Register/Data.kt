@@ -1,4 +1,4 @@
-package com.techiq.wallpaperwonders.Model.response.Register
+package com.techiq.wallpaperwonders.model.response.Register
 
 
 import com.google.gson.annotations.SerializedName

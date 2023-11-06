@@ -33,7 +33,6 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object CommonProvider {
 
-
     @Singleton
     @Named(SHARED_COMMON)
     @Provides

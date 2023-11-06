@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
-import com.techiq.wallpaperwonders.Model.response.SignIn.SigninResponse
+import com.techiq.wallpaperwonders.model.response.SignIn.SigninResponse
 import com.techiq.wallpaperwonders.R
 import com.techiq.wallpaperwonders.base.ActivityBase
 import com.techiq.wallpaperwonders.databinding.ActivitySigninBinding

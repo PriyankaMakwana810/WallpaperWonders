@@ -1,7 +1,6 @@
-package com.techiq.wallpaperwonders.repository.Signin
+package com.techiq.wallpaperwonders.repository.main
 
 import android.view.View
-import com.techiq.wallpaperwonders.model.request.LoginRequest
 import com.techiq.wallpaperwonders.service.ApiClient
 import com.techiq.wallpaperwonders.service.ApiState
 import com.techiq.wallpaperwonders.service.NetworkConstants
@@ -9,25 +8,28 @@ import com.techiq.wallpaperwonders.service.NetworkConstants.getApiStateResponseS
 import com.techiq.wallpaperwonders.service.ResponseState
 import com.techiq.wallpaperwonders.utils.Constant
 import com.techiq.wallpaperwonders.utils.PrefUtils
-import retrofit2.Response
 import javax.inject.Inject
 import javax.inject.Named
 
-class SigninRepository @Inject constructor(
+class MainRepository @Inject constructor(
     @Named(Constant.API_CLIENT) private val apiClient: ApiClient,
     @Named(Constant.SHARED_COMMON) private val prefUtils: PrefUtils,
 ) {
-    suspend fun userSignin(
+    suspend fun getCollectionsList(
         parent: View?,
 
         isSuccessMessageShow: Boolean,
         isFailureMessageShow: Boolean,
-        loginRequest: LoginRequest,
+        collectionId: String?,
+        authKey: String? = "AUTHORIZATION_KEY",
+        pretty: Boolean?,
+        page: Int?,
+        per_page: Int?,
     ): ApiState {
 
         val responseData: ResponseState?
         if (Constant.isNetWork(parent!!.context)) {
-            val response = apiClient.signin(loginRequest)
+            val response = apiClient.collectionList(collectionId, authKey, pretty, page, per_page)
             val responseBody = response.body()
 
             val responseMessage =
@@ -35,15 +37,13 @@ class SigninRepository @Inject constructor(
             responseData =
                 ResponseState(
                     apiStatus = response.code(),
-                    message = response.body()?.message,
-                    response = response as Response<Any>,
+                    message = response.body(),
+                    response = response,
                     responseBody = responseBody,
                     parentView = parent,
                     isFailureMessageShow = isFailureMessageShow,
                     isSuccessMessageShow = isSuccessMessageShow
-
                 )
-
         } else
             responseData =
                 ResponseState(

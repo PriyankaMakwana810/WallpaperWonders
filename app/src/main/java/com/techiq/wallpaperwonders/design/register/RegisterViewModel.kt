@@ -11,7 +11,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.techiq.wallpaperwonders.BR
-import com.techiq.wallpaperwonders.Model.request.RegisterationRequest
+import com.techiq.wallpaperwonders.model.request.RegisterationRequest
 import com.techiq.wallpaperwonders.R
 import com.techiq.wallpaperwonders.repository.Register.RegisterRepository
 import com.techiq.wallpaperwonders.service.ApiState

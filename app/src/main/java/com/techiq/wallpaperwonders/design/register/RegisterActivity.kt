@@ -3,7 +3,7 @@ package com.techiq.wallpaperwonders.design.register
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
-import com.techiq.wallpaperwonders.Model.response.Register.RegisterResponse
+import com.techiq.wallpaperwonders.model.response.Register.RegisterResponse
 import com.techiq.wallpaperwonders.R
 import com.techiq.wallpaperwonders.base.ActivityBase
 import com.techiq.wallpaperwonders.databinding.ActivityRegisterBinding
@@ -32,8 +32,6 @@ class RegisterActivity : ActivityBase() {
             constant = Constant
             viewModelRegister.parentView.set(clParent)
             // tvLoginVersionCodeName.text = getString(R.string.v, versionCode, versionName)
-
-
             etEmail.setText(registerUsername)
             etEmail.setText(registerUsername)
             etPassword.setText(registerPassword)

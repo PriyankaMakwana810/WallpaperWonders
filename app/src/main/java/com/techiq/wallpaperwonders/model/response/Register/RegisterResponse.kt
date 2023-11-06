@@ -1,16 +1,13 @@
-package com.techiq.wallpaperwonders.Model.response.SignIn
+package com.techiq.wallpaperwonders.model.response.Register
 
 
 import com.google.gson.annotations.SerializedName
 
-
-data class SigninResponse(
+data class RegisterResponse(
     @SerializedName("code")
     val code: Int,
     @SerializedName("data")
-    val data: Data,
+    val `data`: Data,
     @SerializedName("message")
     val message: String,
-    @SerializedName("ModelState")
-    val modelState: ModelState,
 )

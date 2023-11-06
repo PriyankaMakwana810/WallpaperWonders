@@ -15,7 +15,7 @@
             android:textColor="@color/black"
             android:padding="@dimen/_12sdp"
             android:textSize="@dimen/_12sdp"
-            android:fontFamily="@font/poppins_bold"
+            android:fontFamily="@font/poppins_medium"
             tools:text="Item"/>
 
         <androidx.recyclerview.widget.RecyclerView

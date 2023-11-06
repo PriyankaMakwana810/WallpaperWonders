@@ -1,7 +1,6 @@
 package com.techiq.wallpaperwonders.base
 
 import android.content.Intent
-import android.location.LocationManager
 import android.os.Bundle
 import com.techiq.wallpaperwonders.design.signin.SigninActivity
 import com.techiq.wallpaperwonders.utils.Constant
@@ -51,14 +50,6 @@ open class ActivityBase : DataBindingActivity() {
             finishAffinity()
         }
     }
-
-    private fun isLocationEnabled(): Boolean {
-        val locationManager = getSystemService(LOCATION_SERVICE) as LocationManager
-        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(
-            LocationManager.NETWORK_PROVIDER
-        )
-    }
-
 
     open fun onBackPress() {
         finish()
