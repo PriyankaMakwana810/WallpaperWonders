@@ -1,4 +1,4 @@
-package com.techiq.wallpaperwonders.model.response.collection
+package com.techiq.wallpaperwonders.model.response.pexels.collection
 
 data class CollectionItem(
     val description: Any,

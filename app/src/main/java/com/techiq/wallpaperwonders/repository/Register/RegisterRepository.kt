@@ -27,7 +27,9 @@ class RegisterRepository @Inject constructor(
     ): ApiState {
         val responseData: ResponseState?
         if (Constant.isNetWork(parent!!.context)) {
-            val response = apiClient.register(registerationRequest = registerationRequest)
+            val response = apiClient.
+
+            register(registerationRequest = registerationRequest)
             val responseBody = response.body()
             Log.d("TAG", "userRegister: " + response.code() + "\n message" + response.message())
             val responseMessage =

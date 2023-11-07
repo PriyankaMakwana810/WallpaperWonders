@@ -8,16 +8,20 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import com.techiq.wallpaperwonders.R
+import com.techiq.wallpaperwonders.utils.GlideUtils
+
 
 open class BaseFragment : Fragment() {
     lateinit var mContext: Context
     lateinit var mActivity: Activity
+    var glideUtils: GlideUtils? = null
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
 
         mContext = context
         mActivity = context as Activity
+        glideUtils = GlideUtils(mContext)
     }
 
     fun setupToolbarWithMenu(view: View, title: String? = null, icon: Int = R.drawable.v_ic_menu) {

@@ -22,6 +22,10 @@ object NetworkConstants {
 
         //  const val SIGNIN_URL = "https://dummyjson.com/"
         const val SIGNIN_URL = "http://restapi.adequateshop.com/api/authaccount/"
+        private var pixabayURL: String = "http://pixabay.com/"
+        private var pexelsURL: String = "https://api.pexels.com/"
+
+
     }
 
     object ApiCode {
@@ -58,16 +62,6 @@ object NetworkConstants {
 
                     else -> {
                         if (isNetworkAvailable == false) {
-                            // val getDataFromDatabase = funListener.invoke(Constant.GET_DATA_IN_DATABASE, null)
-//                            if (getDataFromDatabase != null) {
-//                                Constant.logI(
-//                                    "TAG",
-//                                    "getApiStateResponseStatus: get Data,--> $getDataFromDatabase"
-//                                )
-//                                responseBody = getDataFromDatabase
-//                                apiStatus = ApiCode.SUCCESS_CODE
-//
-//                            } else {
                             Constant.smallToastWithContext(
                                 parentView!!.context, ErrorMsg.NO_NETWORK
                             )
@@ -83,9 +77,6 @@ object NetworkConstants {
                                     // funListener.invoke(Constant.DELETE_DATA_IN_DATABASE, null)
                                     responseBody?.let {
                                         Constant.logI("TAG", "getApiStateResponseStatus: insert")
-//                                        funListener.invoke(
-//                                            Constant.INSERT_DATA_IN_DATABASE, responseBody
-//                                        )
                                     }
                                 }
                                 if (parentView != null && isSuccessMessageShow == true) Constant.smallToastWithContext(
@@ -300,200 +291,3 @@ object NetworkConstants {
         }
     }
 }
-//
-//
-//    fun getApiStateResponseStatus(
-//        responseState: ResponseState?, prefUtils: PrefUtils, funListener: (Int, Any?) -> Any?
-//    ): ApiState {
-//        responseState.apply {
-//            try {
-//                when (this) {
-//                    null -> {
-//                        return ApiState(
-//                            localStatus = Status.ERROR, localError = ErrorMsg.SOMETHING_WENT_WRONG
-//                        )
-//                    }
-//
-//                    else -> {
-//                        if (isNetworkAvailable == false) {
-//                            val getDataFromDatabase = funListener.invoke(GET_DATA_IN_DATABASE, null)
-//                            if (getDataFromDatabase != null) {
-//                                logI(
-//                                    "TAG",
-//                                    "getApiStateResponseStatus: get Data,--> $getDataFromDatabase"
-//                                )
-//                                responseBody = getDataFromDatabase
-//                                apiStatus = ApiCode.SUCCESS_CODE
-//
-//                            } else {
-//                                smallToastWithContext(
-//                                    parentView!!.context, ErrorMsg.NO_NETWORK
-//                                )
-//                                return ApiState(
-//                                    localError = ErrorMsg.NO_NETWORK, localStatus = Status.ERROR
-//                                )
-//                            }
-//                        }
-//                        when (apiStatus) {
-//                            ApiCode.SUCCESS_CODE -> {
-//                                if (isNetworkAvailable == true) {
-//                                    logI("TAG", "getApiStateResponseStatus: delete")
-//                                    funListener.invoke(DELETE_DATA_IN_DATABASE, null)
-//                                    responseBody?.let {
-//                                        logI("TAG", "getApiStateResponseStatus: insert")
-//                                        funListener.invoke(
-//                                            INSERT_DATA_IN_DATABASE, responseBody
-//                                        )
-//                                    }
-//                                }
-//                                if (parentView != null && isSuccessMessageShow == true) smallToastWithContext(
-//                                    parentView.context,
-//                                    getMessageFromApi(message.toString(), prefUtils),
-//                                )
-//                                return ApiState(
-//                                    Status.SUCCESS,
-//                                    getMessageFromApi(message.toString(), prefUtils),
-//                                    responseBody
-//                                )
-//                            }
-//
-//                            ApiCode.QUEUE_CODE -> {
-//                                if (parentView != null && isSuccessMessageShow == true) smallToastWithContext(
-//                                    parentView.context,
-//                                    getMessageFromApi(message.toString(), prefUtils),
-//                                )
-//                                return ApiState(
-//                                    Status.QUEUE,
-//                                    getMessageFromApi(message.toString(), prefUtils),
-//                                    responseBody
-//                                )
-//                            }
-//
-//                            ApiCode.FAILURE_CODE_202 -> {
-//                                if (parentView != null && isFailureMessageShow == true) smallToastWithContext(
-//                                    parentView.context,
-//                                    getMessageFromApi(message.toString(), prefUtils),
-//
-//                                    )
-//                                return ApiState(
-//                                    Status.FAIL,
-//                                    getMessageFromApi(message.toString(), prefUtils),
-//                                    responseBody
-//                                )
-//                            }
-//
-//                            ApiCode.UN_AUTHORIZE -> {
-//                                if (parentView != null && isFailureMessageShow == true) smallToastWithContext(
-//                                    parentView.context,
-//                                    getMessageFromApi(
-//                                        response?.message().toString(), prefUtils
-//                                    ),
-//                                )
-//                                return ApiState(
-//                                    Status.UNAUTHORISED, getMessageFromApi(
-//                                        response?.message().toString(), prefUtils
-//                                    ), responseBody
-//                                )
-//                            }
-//
-//                            ApiCode.FAILURE_CODE_422 -> {
-//                                if (parentView != null && isFailureMessageShow == true) smallToastWithContext(
-//                                    parentView.context,
-//                                    getMessageFromApi(
-//                                        response?.message().toString(), prefUtils
-//                                    ),
-//                                )
-//                                return ApiState(
-//                                    Status.FAIL, getMessageFromApi(
-//                                        response?.message().toString(), prefUtils
-//                                    ), responseBody
-//                                )
-//                            }
-//
-//                            else -> {
-//                                if (parentView != null && isFailureMessageShow == true) smallToastWithContext(
-//                                    parentView.context,
-//                                    getMessageFromApi(message.toString(), prefUtils)
-//                                )
-//                                return ApiState(
-//                                    Status.ERROR,
-//                                    getMessageFromApi(message.toString(), prefUtils),
-//                                )
-//                            }
-//                        }
-//                    }
-//                }
-//            } catch (e: Exception) {
-//                e.localizedMessage?.let { logE("catch Error", it) }
-//                return ApiState(
-//                    localStatus = Status.ERROR, localError = ErrorMsg.SOMETHING_WENT_WRONG
-//                )
-//            }
-//        }
-//    }
-
-
-//    fun setProgressText(
-//        context: Context,
-//        showProgress: String = "",
-//        downloadInfo: DownloadInfo? = null,
-//        cancelDownload: () -> Unit
-//    ) {
-//        if (::wvProgressText.isInitialized) {
-//            wvProgressText.visibility = if (showProgress == "") View.INVISIBLE else View.VISIBLE
-//            btCancelDownload.visibility = if (downloadInfo == null) View.INVISIBLE else View.VISIBLE
-//            clProgressDialog.setBackgroundColor(
-//                if (showProgress == "") ContextCompat.getColor(
-//                    context, R.color.progressBackgroundColor
-//                )
-//                else ContextCompat.getColor(context, R.color.progress_gray)
-//            )
-//
-//            if (downloadInfo != null) {
-//                val progress = String.format(Locale.ENGLISH, "%.2f", downloadInfo.progress)
-//                val totalSize = String.format(
-//                    Locale.ENGLISH, "%.2f", downloadInfo.contentLengthBytes.toDouble() / 1000000
-//                )
-//                val downloadedSize = String.format(
-//                    Locale.ENGLISH,
-//                    "%.2f",
-//                    downloadInfo.downloadedContentLengthBytes.toDouble() / 1000000
-//                )
-//                val speed = String.format(
-//                    Locale.ENGLISH, "%.2f", downloadInfo.bytesPerSecond.toDouble() / 1024
-//                )
-//
-//                wvProgressText.setTextWithPercentageAndData(
-//                    progress, downloadedSize, totalSize, speed
-//                )
-//
-//            } else {
-//                wvProgressText.setTextWithPercentage(showProgress)
-//
-//            }
-//
-//            btCancelDownload.setOnClickListener {
-//                cancelDownload.invoke()
-//            }
-//        }
-//    }
-
-
-//
-//    fun Context.getMonthList(position: Int? = 0): Pair<String, ArrayList<String>> {
-//        val labels = arrayListOf<String>()
-//        labels.add(getString(R.string.choose_month))
-//        labels.add(getString(R.string.january))
-//        labels.add(getString(R.string.february))
-//        labels.add(getString(R.string.march))
-//        labels.add(getString(R.string.april))
-//        labels.add(getString(R.string.may))
-//        labels.add(getString(R.string.june))
-//        labels.add(getString(R.string.july))
-//        labels.add(getString(R.string.august))
-//        labels.add(getString(R.string.september))
-//        labels.add(getString(R.string.october))
-//        labels.add(getString(R.string.november))
-//        labels.add(getString(R.string.december))
-//        return Pair(if (position != null) labels[position].substring(0, 3) else "", labels)
-//    }

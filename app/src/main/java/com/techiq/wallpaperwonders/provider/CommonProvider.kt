@@ -13,6 +13,7 @@ import com.techiq.wallpaperwonders.service.NetworkConstants
 import com.techiq.wallpaperwonders.utils.Constant
 
 import com.techiq.wallpaperwonders.utils.Constant.SHARED_COMMON
+import com.techiq.wallpaperwonders.utils.Constants
 import com.techiq.wallpaperwonders.utils.PrefUtils
 
 import dagger.Module
@@ -24,6 +25,7 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.create
 import java.util.*
 import java.util.concurrent.TimeUnit
 import javax.inject.Named
@@ -84,6 +86,18 @@ object CommonProvider {
             .create(ApiInterface::class.java)
     }
 
+
+    @Provides
+    @Named(Constant.SERVICE_WITH_PIXABAY)
+    @Singleton
+    fun providesApiServiceForPixabayImages(
+        @Named(Constant.OK_HTTPS) okHttpClient: OkHttpClient,
+        @Named(Constant.GSON) gson: Gson,
+    ):ApiInterface{
+        return Retrofit.Builder().baseUrl(Constants.KEY_PIXABAY_LINK).client(okHttpClient)
+            .addConverterFactory(GsonConverterFactory.create(gson)).build()
+            .create(ApiInterface::class.java)
+    }
     @Provides
     @Named(Constant.SERVICE_WITH_GSON_SIGNIN)
     @Singleton

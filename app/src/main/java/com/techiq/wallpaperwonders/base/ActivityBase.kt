@@ -1,7 +1,14 @@
 package com.techiq.wallpaperwonders.base
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
+import com.techiq.wallpaperwonders.R
 import com.techiq.wallpaperwonders.design.signin.SigninActivity
 import com.techiq.wallpaperwonders.utils.Constant
 import com.techiq.wallpaperwonders.utils.Constant.INTENT_LOGIN_PASSWORD
@@ -53,6 +60,43 @@ open class ActivityBase : DataBindingActivity() {
 
     open fun onBackPress() {
         finish()
+    }
+
+    fun showSoftKeyboard(editText: EditText?) {
+        val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT)
+    }
+
+    fun hideSoftKeyboard() {
+        try {
+            val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(window.currentFocus?.windowToken, 0)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    fun pushFragment(fragment: Fragment, addToBackStack: Boolean) {
+        false.pushFragment(fragment, addToBackStack)
+    }
+
+    private fun Boolean.pushFragment(fragment: Fragment, addToBackStack: Boolean) {
+        val manager: FragmentManager = supportFragmentManager
+        if (this && manager.backStackEntryCount > 0) {
+            try {
+                manager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+        val backStateName: String = fragment.javaClass.name
+        val fragmentPopped: Boolean = manager.popBackStackImmediate(backStateName, 0)
+        if (!fragmentPopped) {
+            val ft: FragmentTransaction = manager.beginTransaction()
+            ft.replace(R.id.container, fragment, backStateName)
+            if (addToBackStack) ft.addToBackStack(backStateName)
+            ft.commit()
+        }
     }
 
 

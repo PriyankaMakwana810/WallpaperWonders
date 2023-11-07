@@ -3,13 +3,16 @@ package com.techiq.wallpaperwonders.design.main
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.core.view.GravityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.techiq.wallpaperwonders.R
 import com.techiq.wallpaperwonders.adapters.NavigationDrawerAdapter
 import com.techiq.wallpaperwonders.base.ActivityBase
 import com.techiq.wallpaperwonders.databinding.ActivityMainBinding
+import com.techiq.wallpaperwonders.interfaces.OnItemClickedListener
 import com.techiq.wallpaperwonders.model.PexelsModel
-import com.techiq.wallpaperwonders.model.response.collection.CollectionItem
+import com.techiq.wallpaperwonders.model.response.pexels.collection.CollectionItem
+import com.techiq.wallpaperwonders.utils.Constants
 import com.techiq.wallpaperwonders.utils.Constants.Pixabay.getPixabayList
 
 class MainActivity : ActivityBase() {
@@ -59,6 +62,59 @@ class MainActivity : ActivityBase() {
         val layoutManager = LinearLayoutManager(this)
         binding.navigationView.rvNavigation.layoutManager = layoutManager
         binding.navigationView.rvNavigation.adapter = adapter
+
+        adapter!!.setOnItemClickListener(object : OnItemClickedListener {
+            override fun onItemClicked(position: Int) {
+                binding.drawerLayout.closeDrawer(GravityCompat.START)
+                binding.toolbar.tvTitle.text = listNavigationItems[position]
+                pushMainFragment(position)
+                selectedCategoryPosition = position
+            }
+        })
+        binding.navigationView.rvNavigation.layoutManager = layoutManager
+        binding.navigationView.rvNavigation.adapter = adapter
+        pushMainFragment(1)
+
+
+    }
+
+    private fun pushMainFragment(position: Int, subPosition: Int? = null) {
+        val fragment = MainFragment()
+        val bundle = Bundle()
+        if (position == 0) {
+//            pushFragment(DownloadedFragment(), false)
+        } else if (listNavigationItems[position].equals("all", ignoreCase = true)) {
+            bundle.putString(
+                Constants.KEY_IMAGE_CATEGORY,
+                ""
+            )
+            fragment.arguments = bundle
+            pushFragment(fragment, false)
+        } else {
+            bundle.putString(Constants.KEY_IMAGE_CATEGORY, listNavigationItems[position])
+            fragment.arguments = bundle
+            pushFragment(fragment, false)
+        }
+
+    }
+
+    private fun pushMainFragment(position: Int) {
+        val fragment = MainFragment()
+        val bundle = Bundle()
+        if (position == 0) {
+            pushFragment(fragment, false)
+        } else if (listNavigationItems[position].equals("all", ignoreCase = true)) {
+            bundle.putString(
+                Constants.KEY_IMAGE_CATEGORY,
+                ""
+            )
+            fragment.arguments = bundle
+            pushFragment(fragment, false)
+        } else {
+            bundle.putString(Constants.KEY_IMAGE_CATEGORY, listNavigationItems[position])
+            fragment.arguments = bundle
+            pushFragment(fragment, false)
+        }
 
     }
 }

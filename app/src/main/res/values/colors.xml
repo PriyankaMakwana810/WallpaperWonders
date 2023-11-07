@@ -22,11 +22,14 @@
 
     <color name="toolbarWhite">#ffffff</color>
     <color name="menu_white">#FFFFFF</color>
+
     <color name="progressBackgroundColor">#99cccccc</color>
     <color name="progress_gray">#B2B2B2</color>
+
     <color name="pink">#ef79b6</color>
     <color name="blue">#52bdeb</color>
     <color name="textColor">#FF3700B3</color>
+
     <color name="textColor_5">#0A20163A</color>
     <color name="textColor_40">#4D20163A</color>
     <color name="editTextErrorColor">@color/red</color>

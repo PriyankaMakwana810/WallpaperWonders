@@ -67,6 +67,7 @@ object Constant {
     const val SERVICE_FOR_LOGIN_GSON = "ServiceForLoginGson"
     const val SERVICE_WITH_GSON = "ServiceWithGson"
     const val SERVICE_WITH_GSON_SIGNIN = "ServiceWithGsonSignIN"
+    const val SERVICE_WITH_PIXABAY = "ServiceWithPixabay"
     const val IS_LOGIN = "isLogin"
     const val LOGOUT_SCREEN = "logoutScreen"
     const val LOGOUT = "logout"

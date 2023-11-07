@@ -1,6 +1,7 @@
 package com.techiq.wallpaperwonders.repository.main
 
 import android.view.View
+import com.google.gson.Gson
 import com.techiq.wallpaperwonders.service.ApiClient
 import com.techiq.wallpaperwonders.service.ApiState
 import com.techiq.wallpaperwonders.service.NetworkConstants
@@ -12,24 +13,39 @@ import javax.inject.Inject
 import javax.inject.Named
 
 class MainRepository @Inject constructor(
+    @Named(Constant.GSON) private val gson: Gson,
     @Named(Constant.API_CLIENT) private val apiClient: ApiClient,
     @Named(Constant.SHARED_COMMON) private val prefUtils: PrefUtils,
 ) {
-    suspend fun getCollectionsList(
+    suspend fun getImagesPixabay(
         parent: View?,
-
         isSuccessMessageShow: Boolean,
         isFailureMessageShow: Boolean,
-        collectionId: String?,
-        authKey: String? = "AUTHORIZATION_KEY",
+        key: String?,
+        category: String?,
         pretty: Boolean?,
         page: Int?,
+        orientation: String?,
         per_page: Int?,
+        image_type: String?,
+        q: String?,
+        safesearch: Boolean?,
+        order: String?
     ): ApiState {
-
         val responseData: ResponseState?
         if (Constant.isNetWork(parent!!.context)) {
-            val response = apiClient.collectionList(collectionId, authKey, pretty, page, per_page)
+            val response = apiClient.getImagesPixabay(
+                key = key,
+                category = category,
+                pretty = pretty,
+                page = page,
+                orientation = orientation,
+                per_page = per_page,
+                image_type = image_type,
+                q = q,
+                safesearch = safesearch,
+                order = order
+            )
             val responseBody = response.body()
 
             val responseMessage =

@@ -107,7 +107,7 @@ class RegisterViewModel @Inject constructor(
             launch {
                 Log.d(
                     "TAG",
-                    "getApiStateResponseStatus: " + "inside viemodel" + response.response.toString()
+                    "getApiStateResponseStatus: " + "inside viewModel" + response.response.toString()
                 )
                 Constant.dismissProgress(parentView.get()!!.context)
                 _registerUserResponse.postValue(response)
