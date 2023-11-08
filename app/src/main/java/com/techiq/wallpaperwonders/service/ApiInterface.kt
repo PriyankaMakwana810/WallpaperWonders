@@ -44,7 +44,7 @@ interface ApiInterface {
     ): Response<PixabayImagesResponse>
 
     @GET("/v1/search")
-    fun getImagesPexels(
+    suspend fun getImagesPexels(
         @Header("Authorization") authKey: String?,
         @Query("query") query: String?,
         @Query("image_type") image_type: String?,
@@ -54,7 +54,7 @@ interface ApiInterface {
     ): Response<PexelsImagesResponse>
 
     @GET("/videos/search")
-    fun getVideosPexels(
+    suspend fun getVideosPexels(
         @Header("Authorization") authKey: String?,
         @Query("query") query: String?,
         @Query("orientation") orientation: String?,
@@ -65,7 +65,7 @@ interface ApiInterface {
     ): Response<PexelsVideosResponse>
 
     @GET("/v1/collections/featured")
-    fun getCollectionPexels(
+    suspend fun getCollectionPexels(
         @Header("Authorization") authKey: String?,
         @Query("pretty") pretty: Boolean?,
         @Query("page") page: Int?,

@@ -15,7 +15,6 @@ import com.techiq.wallpaperwonders.databinding.FragmentMainBinding
 import com.techiq.wallpaperwonders.interfaces.LoadMoreListener
 import com.techiq.wallpaperwonders.interfaces.OnItemClickedListener
 import com.techiq.wallpaperwonders.model.response.pixabay.PixabayImagesResponse
-import com.techiq.wallpaperwonders.model.response.pixabay.PixabayResponse
 import com.techiq.wallpaperwonders.service.Status
 import com.techiq.wallpaperwonders.utils.Constant.smallToastWithContext
 import com.techiq.wallpaperwonders.utils.Constants
@@ -24,7 +23,7 @@ import java.util.Locale
 
 @AndroidEntryPoint
 class MainFragment : BaseFragment() {
-    var mBinder: FragmentMainBinding? = null
+    var binding: FragmentMainBinding? = null
     private val viewModelMain by viewModels<MainViewModel>()
     private lateinit var pixabayImagesResponse: PixabayImagesResponse
     var imageCategory: String? = null
@@ -33,7 +32,6 @@ class MainFragment : BaseFragment() {
     var perPage = 100
     var list = ArrayList<Any?>()
     var imagesAdapter: ImagesAdapter? = null
-    var index = 21
     var isLast = false
 
     override fun onCreateView(
@@ -42,8 +40,8 @@ class MainFragment : BaseFragment() {
         savedInstanceState: Bundle?,
     ): View {
         dataFromBundle
-        if (mBinder == null) {
-            mBinder =
+        if (binding == null) {
+            binding =
                 inflater.let {
                     DataBindingUtil.inflate(
                         it,
@@ -53,12 +51,12 @@ class MainFragment : BaseFragment() {
                     )
                 }
         }
-        mBinder?.apply {
-            viewModelMain.parentView.set(flMain)
+        binding?.apply {
+            viewModelMain.parentView.set((activity as MainActivity).binding.parentView)
         }
         setObservers()
         prepareLayout()
-        return mBinder!!.root
+        return binding!!.root
     }
 
     private fun prepareLayout() {
@@ -68,8 +66,8 @@ class MainFragment : BaseFragment() {
         } catch (e: Exception) {
             e.printStackTrace()
         }
-        mBinder?.llError?.setOnClickListener {
-            mBinder?.llError!!.visibility = View.GONE
+        binding?.llError?.setOnClickListener {
+            binding?.llError!!.visibility = View.GONE
             resetQueryParameters()
             try {
                 getImagesFromPixabay(true)
@@ -91,7 +89,7 @@ class MainFragment : BaseFragment() {
                 Status.SUCCESS -> {
                     val response = it.response as PixabayImagesResponse
                     pixabayImagesResponse = it.response
-                    smallToastWithContext(requireContext(),it.response.toString())
+                    smallToastWithContext(requireContext(), it.response.toString())
                     if (response != null) {
                         if (list.size != 0) {
                             list.removeAt(list.size - 1)
@@ -107,7 +105,6 @@ class MainFragment : BaseFragment() {
                         Log.e("onAuthenticateButtonClick: ", it.toString())
 
                     } else {
-
                         smallToastWithContext(requireContext(), getString(R.string.wrongCredential))
                     }
                 }
@@ -125,12 +122,10 @@ class MainFragment : BaseFragment() {
 
     private fun resetQueryParameters() {
         pageNumber = 1
-        index = 21
         list.clear()
         imagesAdapter?.notifyDataSetChanged()
         isLast = false
     }
-
 
     private fun setUpRecyclerView() {
         val gridLayoutManager = GridLayoutManager(mActivity, 3)
@@ -140,12 +135,12 @@ class MainFragment : BaseFragment() {
                 return spanCount
             }
         }
-        mBinder?.rvImages?.layoutManager = gridLayoutManager
+        binding?.rvImages?.layoutManager = gridLayoutManager
         imagesAdapter = mContext.let {
             ImagesAdapter(
                 glideUtils!!,
                 list,
-                mBinder!!.rvImages
+                binding!!.rvImages
             )
         }
         imagesAdapter?.setLoadMoreListener(object : LoadMoreListener {
@@ -165,8 +160,11 @@ class MainFragment : BaseFragment() {
             override fun onItemClicked(position: Int) {
                 smallToastWithContext(requireContext(), "image clicked")
             }
+
+            override fun onSubItemClicked(position: Int, subPosition: Int) {
+            }
         })
-        mBinder?.rvImages?.adapter = imagesAdapter
+        binding?.rvImages?.adapter = imagesAdapter
     }
 
     private val dataFromBundle: Unit
@@ -199,11 +197,11 @@ class MainFragment : BaseFragment() {
         imagesAdapter?.notifyDataSetChanged()
         imagesAdapter?.setLoaded()
         if (list.size > 0) {
-            mBinder?.llError?.visibility = View.GONE
-            mBinder?.rvImages?.visibility = View.VISIBLE
+            binding?.llError?.visibility = View.GONE
+            binding?.rvImages?.visibility = View.VISIBLE
         } else {
-            mBinder?.llError?.visibility = View.VISIBLE
-            mBinder?.rvImages?.visibility = View.GONE
+            binding?.llError?.visibility = View.VISIBLE
+            binding?.rvImages?.visibility = View.GONE
         }
     }
 }

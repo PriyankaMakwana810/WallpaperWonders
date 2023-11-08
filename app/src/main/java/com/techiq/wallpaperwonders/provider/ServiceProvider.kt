@@ -12,6 +12,7 @@ import com.techiq.wallpaperwonders.utils.Constant.OK_HTTPS
 import com.techiq.wallpaperwonders.utils.Constant.SERVICE_FOR_LOGIN_GSON
 import com.techiq.wallpaperwonders.utils.Constant.SERVICE_WITH_GSON
 import com.techiq.wallpaperwonders.utils.Constant.SERVICE_WITH_GSON_SIGNIN
+import com.techiq.wallpaperwonders.utils.Constant.SERVICE_WITH_PEXELS
 import com.techiq.wallpaperwonders.utils.Constant.SERVICE_WITH_PIXABAY
 import dagger.Module
 import dagger.Provides
@@ -41,9 +42,11 @@ object ServiceProvider {
         @Named(SERVICE_FOR_LOGIN_GSON) serviceForLogin: ApiInterface,
         @Named(SERVICE_WITH_GSON_SIGNIN) serviceForSignin: ApiInterface,
         @Named(SERVICE_WITH_PIXABAY) serviceForPixabay: ApiInterface,
+        @Named(SERVICE_WITH_PEXELS) serviceForPexels: ApiInterface,
     ): ApiClient = ApiClient(
         apiInterface = serviceForSignin,
         pixabayInterface = serviceForPixabay,
+        pexelsInterface = serviceForPexels
     )
 
 

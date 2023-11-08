@@ -14,6 +14,7 @@ import com.techiq.wallpaperwonders.service.ApiState
 import com.techiq.wallpaperwonders.utils.Constant
 import com.techiq.wallpaperwonders.utils.PrefUtils
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 import javax.inject.Named
@@ -26,9 +27,14 @@ class MainViewModel @Inject constructor(
 ) : ViewModel(), Observable {
     val parentView: ObservableField<View> = ObservableField()
     private val _pixabayImagesResponse: MutableLiveData<ApiState> = MutableLiveData()
+    private val _pexelsCollectionResponse: MutableLiveData<ApiState> = MutableLiveData()
     val pixabayImagesResponse: LiveData<ApiState>
         get() {
             return _pixabayImagesResponse
+        }
+    val pexelsCollectionResponse: LiveData<ApiState>
+        get() {
+            return _pexelsCollectionResponse
         }
 
     fun getPixabayImages(
@@ -43,8 +49,8 @@ class MainViewModel @Inject constructor(
         safesearch: Boolean?,
         order: String?,
     ) {
-        Constant.showProgress(parentView.get()!!.context)
         viewModelScope.launch {
+            Constant.showProgress(parentView.get()!!.context)
             val response = repository.getImagesPixabay(
                 parent = parentView.get(),
                 isSuccessMessageShow = false,
@@ -67,6 +73,25 @@ class MainViewModel @Inject constructor(
                 )
                 Constant.dismissProgress(parentView.get()!!.context)
                 _pixabayImagesResponse.postValue(response)
+            }
+        }
+    }
+
+    fun getCollectionPexels(authKey: String?, pretty: Boolean?, page: Int?, per_page: Int?) {
+        viewModelScope.async {
+            val response = repository.getCollectionPexels(
+                parent = parentView.get(),
+                isSuccessMessageShow = false,
+                isFailureMessageShow = true,
+                authKey = authKey, pretty = pretty, page = page, per_page = per_page
+            )
+            launch {
+                Log.d(
+                    "TAG",
+                    "getApiStateResponseStatus: " + "inside viewModel" + response.response.toString()
+                )
+                Constant.dismissProgress(parentView.get()!!.context)
+                _pexelsCollectionResponse.postValue(response)
             }
         }
     }

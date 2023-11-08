@@ -13,6 +13,7 @@ object Constants {
     const val KEY_DOWNLOAD_WALLPAPER_COUNT = "download_wallpaper_sount"
     const val KEY_HOME_SCREEN_VISITED_COUNT = "home_screen_visited_count"
     const val KEY_PIXABAY_LINK = "https://pixabay.com/"
+    const val KEY_PEXELS_LINK = "https://api.pexels.com/"
     const val PIXABAY_API_KEY = "8567407-581196f5ee3a528eb32569b84/"
     const val TAPPX_KEY = "Pub-41981-Android-1384"
     const val POWERED_BY = "PrefPoweredBy"

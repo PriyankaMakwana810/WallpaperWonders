@@ -110,7 +110,6 @@ class ImagesAdapter(
             val previewURL =
                 (dataSet[position] as Hit?)!!.webformatURL!!.replace("_640", "_340")
 
-
             glideUtils.loadImage(previewURL, (viewHolder).mBinder.ivImage)
         }
     }

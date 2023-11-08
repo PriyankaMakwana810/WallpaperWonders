@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="failed_to_connect_with_server">Failed to connect with server!</string>
+    <string name="something_went_wrong">Something went wrong!</string>
+    <string name="no_internet_connection">No internet connection!</string>
+    <string name="cancel">Cancel</string>
+    <string name="ok">OK</string>
+    <string name="loading">Loading…</string>
+    <string name="prompt_exit">Press again to Exit</string>
+</resources>

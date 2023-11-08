@@ -1,21 +1,17 @@
 package com.techiq.wallpaperwonders.provider
 
 import android.content.Context
-
 import androidx.databinding.PropertyChangeRegistry
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.intuit.sdp.BuildConfig
-
 import com.techiq.wallpaperwonders.service.ApiInterface
 import com.techiq.wallpaperwonders.service.HeaderLoggingIntercepter
 import com.techiq.wallpaperwonders.service.NetworkConstants
 import com.techiq.wallpaperwonders.utils.Constant
-
 import com.techiq.wallpaperwonders.utils.Constant.SHARED_COMMON
 import com.techiq.wallpaperwonders.utils.Constants
 import com.techiq.wallpaperwonders.utils.PrefUtils
-
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -25,7 +21,6 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.create
 import java.util.*
 import java.util.concurrent.TimeUnit
 import javax.inject.Named
@@ -93,11 +88,24 @@ object CommonProvider {
     fun providesApiServiceForPixabayImages(
         @Named(Constant.OK_HTTPS) okHttpClient: OkHttpClient,
         @Named(Constant.GSON) gson: Gson,
-    ):ApiInterface{
+    ): ApiInterface {
         return Retrofit.Builder().baseUrl(Constants.KEY_PIXABAY_LINK).client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create(gson)).build()
             .create(ApiInterface::class.java)
     }
+
+    @Provides
+    @Named(Constant.SERVICE_WITH_PEXELS)
+    @Singleton
+    fun providesApiServiceForPexels(
+        @Named(Constant.OK_HTTPS) okHttpClient: OkHttpClient,
+        @Named(Constant.GSON) gson: Gson,
+    ): ApiInterface {
+        return Retrofit.Builder().baseUrl(Constants.KEY_PEXELS_LINK).client(okHttpClient)
+            .addConverterFactory(GsonConverterFactory.create(gson)).build()
+            .create(ApiInterface::class.java)
+    }
+
     @Provides
     @Named(Constant.SERVICE_WITH_GSON_SIGNIN)
     @Singleton

@@ -6,6 +6,7 @@
         <item name="colorPrimaryVariant">@color/colorPrimary_CC006C67</item>
         <item name="colorOnPrimary">@color/white</item>
         <item name="colorAccent">@color/colorPrimaryLight</item>
+        <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/colorSecondary</item>
         <item name="colorSecondaryVariant">@color/colorSecondary</item>
@@ -33,6 +34,11 @@
         <item name="android:fitsSystemWindows">true</item>
 
         <!-- Customize your theme here. -->
+    </style>
+
+    <style name="DrawerArrowStyle" parent="@style/Widget.AppCompat.DrawerArrowToggle">
+        <item name="spinBars">true</item>
+        <item name="color">@android:color/black</item>
     </style>
 
     <!-- Base application theme. -->

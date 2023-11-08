@@ -8,6 +8,7 @@ import com.techiq.wallpaperwonders.service.NetworkConstants
 import com.techiq.wallpaperwonders.service.NetworkConstants.getApiStateResponseStatus
 import com.techiq.wallpaperwonders.service.ResponseState
 import com.techiq.wallpaperwonders.utils.Constant
+import com.techiq.wallpaperwonders.utils.Constants
 import com.techiq.wallpaperwonders.utils.PrefUtils
 import javax.inject.Inject
 import javax.inject.Named
@@ -30,7 +31,7 @@ class MainRepository @Inject constructor(
         image_type: String?,
         q: String?,
         safesearch: Boolean?,
-        order: String?
+        order: String?,
     ): ApiState {
         val responseData: ResponseState?
         if (Constant.isNetWork(parent!!.context)) {
@@ -68,6 +69,45 @@ class MainRepository @Inject constructor(
                 )
         return getApiStateResponseStatus(
 
+            responseData, prefUtils
+        )
+    }
+
+    suspend fun getCollectionPexels(
+        parent: View?,
+        isSuccessMessageShow: Boolean,
+        isFailureMessageShow: Boolean,
+        authKey: String? = Constants.AUTHORIZATION_KEY,
+        pretty: Boolean?,
+        page: Int?,
+        per_page: Int?,
+    ): ApiState {
+        val responseData: ResponseState?
+        if (Constant.isNetWork(parent!!.context)) {
+            val response = apiClient.getCollectionPexels(
+                authKey, pretty, page, per_page
+            )
+            val responseBody = response.body()
+
+            val responseMessage =
+                response.message() ?: NetworkConstants.ErrorMsg.SOMETHING_WENT_WRONG
+            responseData =
+                ResponseState(
+                    apiStatus = response.code(),
+                    message = response.body(),
+                    response = response,
+                    responseBody = responseBody,
+                    parentView = parent,
+                    isFailureMessageShow = isFailureMessageShow,
+                    isSuccessMessageShow = isSuccessMessageShow
+                )
+        } else
+            responseData =
+                ResponseState(
+                    parentView = parent,
+                    isNetworkAvailable = false
+                )
+        return getApiStateResponseStatus(
             responseData, prefUtils
         )
     }
