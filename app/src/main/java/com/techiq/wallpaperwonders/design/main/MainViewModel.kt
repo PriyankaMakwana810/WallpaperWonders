@@ -14,7 +14,6 @@ import com.techiq.wallpaperwonders.service.ApiState
 import com.techiq.wallpaperwonders.utils.Constant
 import com.techiq.wallpaperwonders.utils.PrefUtils
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 import javax.inject.Named
@@ -50,7 +49,8 @@ class MainViewModel @Inject constructor(
         order: String?,
     ) {
         viewModelScope.launch {
-            Constant.showProgress(parentView.get()!!.context)
+            Log.e("TAG", "getPixabayImages: API CALL", )
+
             val response = repository.getImagesPixabay(
                 parent = parentView.get(),
                 isSuccessMessageShow = false,
@@ -71,14 +71,13 @@ class MainViewModel @Inject constructor(
                     "TAG",
                     "getApiStateResponseStatus: " + "inside viewModel" + response.response.toString()
                 )
-                Constant.dismissProgress(parentView.get()!!.context)
                 _pixabayImagesResponse.postValue(response)
             }
         }
     }
 
     fun getCollectionPexels(authKey: String?, pretty: Boolean?, page: Int?, per_page: Int?) {
-        viewModelScope.async {
+        viewModelScope.launch {
             val response = repository.getCollectionPexels(
                 parent = parentView.get(),
                 isSuccessMessageShow = false,

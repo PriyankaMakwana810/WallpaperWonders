@@ -1,4 +1,5 @@
 package com.techiq.wallpaperwonders.utils
+
 object Constants {
 
     const val KEY_IMAGE_CATEGORY = "image_type"
@@ -9,16 +10,20 @@ object Constants {
     const val KEY_LARGE_IMAGE_LINK = "large_image_link"
     const val FROM = "from"
     const val KEY_IMAGE_ID = "image_id"
+
     const val KEY_SET_WALLPAPER_COUNT = "set_wallpaper_sount"
     const val KEY_DOWNLOAD_WALLPAPER_COUNT = "download_wallpaper_sount"
     const val KEY_HOME_SCREEN_VISITED_COUNT = "home_screen_visited_count"
     const val KEY_PIXABAY_LINK = "https://pixabay.com/"
     const val KEY_PEXELS_LINK = "https://api.pexels.com/"
-    const val PIXABAY_API_KEY = "8567407-581196f5ee3a528eb32569b84/"
+    const val PIXABAY_API_KEY = "38431804-1c9201a3537e9066943244f83"
     const val TAPPX_KEY = "Pub-41981-Android-1384"
+
     const val POWERED_BY = "PrefPoweredBy"
     const val POWERED_BY_PIXABAY = 0
     const val POWERED_BY_PEXELS = 1
+
+
     const val ORIENTATION = "portrait"
     const val SIZE = "large"
     const val MEDIA_TYPE = "type"
@@ -105,5 +110,4 @@ object Constants {
             return listNavigationItems
         }
     }
-
 }

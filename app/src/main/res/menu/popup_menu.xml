@@ -3,9 +3,9 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/popular"
-            android:title="Popular" />
+            android:title="@string/popular" />
         <item
             android:id="@+id/latest"
-            android:title="Latest" />
+            android:title="@string/latest" />
     </group>
 </menu>

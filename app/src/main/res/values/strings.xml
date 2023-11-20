@@ -12,6 +12,8 @@
     <string name="delete">Delete</string>
     <string name="lock_screen">Lock Screen</string>
     <string name="powered_by">Powered By</string>
+    <string name="popular">Popular</string>
+    <string name="latest">Latest</string>
 
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -45,5 +47,8 @@
     <string name="app_media_settings">App Media Settings</string>
     <string name="your_device_version_not_need_for_this_permission">Your Device Version not need for this permission</string>
     <string name="unable_to_search_n_please_try_with_different_keyword">Unable to search \n Please try with different keyword</string>
+    <string name="pixabay">Pixabay</string>
+    <string name="pexels">Pexels</string>
+    <string name="vertical">vertical</string>
 
 </resources>

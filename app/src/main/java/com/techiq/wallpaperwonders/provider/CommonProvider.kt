@@ -10,7 +10,9 @@ import com.techiq.wallpaperwonders.service.HeaderLoggingIntercepter
 import com.techiq.wallpaperwonders.service.NetworkConstants
 import com.techiq.wallpaperwonders.utils.Constant
 import com.techiq.wallpaperwonders.utils.Constant.SHARED_COMMON
+import com.techiq.wallpaperwonders.utils.Constant.SHARED_GLIDE
 import com.techiq.wallpaperwonders.utils.Constants
+import com.techiq.wallpaperwonders.utils.GlideUtils
 import com.techiq.wallpaperwonders.utils.PrefUtils
 import dagger.Module
 import dagger.Provides
@@ -35,6 +37,12 @@ object CommonProvider {
     @Provides
     fun providesSharedPreference(@ApplicationContext context: Context): PrefUtils =
         PrefUtils(context)
+
+    @Singleton
+    @Named(SHARED_GLIDE)
+    @Provides
+    fun providesGlideUtils(@ApplicationContext context: Context): GlideUtils =
+        GlideUtils(context)
 
     @Singleton
     @Provides

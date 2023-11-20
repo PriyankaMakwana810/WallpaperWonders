@@ -60,6 +60,7 @@ import kotlin.system.exitProcess
 object Constant {
 
     const val SHARED_COMMON = "SharedCommon"
+    const val SHARED_GLIDE = "GlideUitls"
     const val BASE_URL = "BaseUrl"
     const val API_CLIENT = "ApiClient"
     const val OK_HTTPS = "okHttps"
@@ -86,13 +87,14 @@ object Constant {
     private lateinit var wvProgressText: WebView
     private lateinit var btCancelDownload: Button
     private lateinit var clProgressDialog: ConstraintLayout
+
     fun showProgress(context: Context) {
         try {
             dialog = FullWidthDialog(context)
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
             dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             dialog.setCancelable(false)
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) dialog.setContentView(R.layout.progress_dialog_from_33)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) dialog.setContentView(R.layout.progress_dialog)
             else dialog.setContentView(R.layout.progress_dialog)
             wvProgressText = dialog.findViewById(R.id.wvProgressText)
             btCancelDownload = dialog.findViewById(R.id.btCancelDownload)

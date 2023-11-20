@@ -8,20 +8,30 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import com.techiq.wallpaperwonders.R
+import com.techiq.wallpaperwonders.utils.Constant.SHARED_COMMON
+import com.techiq.wallpaperwonders.utils.Constant.SHARED_GLIDE
 import com.techiq.wallpaperwonders.utils.GlideUtils
+import com.techiq.wallpaperwonders.utils.PrefUtils
+import javax.inject.Inject
+import javax.inject.Named
 
 
 open class BaseFragment : Fragment() {
     lateinit var mContext: Context
     lateinit var mActivity: Activity
-    var glideUtils: GlideUtils? = null
+
+    @Inject
+    @Named(SHARED_GLIDE)
+    lateinit var glideUtils: GlideUtils
+
+    @Inject
+    @Named(SHARED_COMMON)
+    lateinit var sharedPref: PrefUtils
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-
         mContext = context
         mActivity = context as Activity
-        glideUtils = GlideUtils(mContext)
     }
 
     fun setupToolbarWithMenu(view: View, title: String? = null, icon: Int = R.drawable.v_ic_menu) {

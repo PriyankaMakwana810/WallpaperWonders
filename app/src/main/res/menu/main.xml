@@ -6,15 +6,9 @@
         android:icon="@drawable/ic_vector_search_white"
         android:title=""
         app:showAsAction="always" />
-
     <item
         android:id="@+id/action_sort"
         android:icon="@drawable/ic_vector_sort"
-        android:title=""
-        app:showAsAction="ifRoom" />
-    <item
-        android:id="@+id/action_settings"
-        android:icon="@drawable/v_ic_settings"
         android:title=""
         app:showAsAction="ifRoom" />
 </menu>

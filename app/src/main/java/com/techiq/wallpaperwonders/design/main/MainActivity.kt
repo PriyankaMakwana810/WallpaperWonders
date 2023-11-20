@@ -171,7 +171,8 @@ class MainActivity : ActivityBase() {
             when (it.localStatus) {
                 Status.SUCCESS -> {
                     val response = it.response as CollectionResponse
-                    smallToast(it.response.toString())
+//                    smallToast(it.response.toString())
+                    Log.e("TAG", "setObservers: Collections ${it.response}" )
                     list = response.collections as ArrayList<CollectionItem>
                     collectionList = list.map {item -> item.title }
                     collectionIdList = list.map {item -> item.id }
@@ -179,11 +180,9 @@ class MainActivity : ActivityBase() {
                     Log.e("TAG", "setObservers: $collectionIdList")
                     setUpNavigationDrawer()
                 }
-
                 Status.ERROR -> {
                     smallToast(it.localError.toString())
                 }
-
                 else -> {
                     smallToast(it.localError.toString())
                 }
