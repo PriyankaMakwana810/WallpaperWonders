@@ -1,6 +1,7 @@
 package com.techiq.wallpaperwonders.design.main
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
@@ -19,8 +20,12 @@ import com.techiq.wallpaperwonders.R
 import com.techiq.wallpaperwonders.adapters.ImagesAdapter
 import com.techiq.wallpaperwonders.base.BaseFragment
 import com.techiq.wallpaperwonders.databinding.FragmentMainBinding
+import com.techiq.wallpaperwonders.design.fullscreen.FullScreenImageActivity
 import com.techiq.wallpaperwonders.interfaces.LoadMoreListener
 import com.techiq.wallpaperwonders.interfaces.OnItemClickedListener
+import com.techiq.wallpaperwonders.model.response.pexels.images.PexelsImagesResponse
+import com.techiq.wallpaperwonders.model.response.pexels.images.PexelsPhotos
+import com.techiq.wallpaperwonders.model.response.pixabay.Hit
 import com.techiq.wallpaperwonders.model.response.pixabay.PixabayImagesResponse
 import com.techiq.wallpaperwonders.service.Status
 import com.techiq.wallpaperwonders.utils.Constant.smallToastWithContext
@@ -195,6 +200,36 @@ class MainFragment : BaseFragment() {
                 }
             }
         }
+        viewModelMain.pexelsImagesResponse.observe(viewLifecycleOwner) {
+            Log.d("TAG", "PixabayImagesResponse: " + it.response.toString())
+            binding.progressBar.visibility = View.GONE
+            when (it.localStatus) {
+                Status.SUCCESS -> {
+                    val response = it.response as PexelsImagesResponse
+                    if (list.size != 0) {
+                        list.removeAt(list.size - 1)
+                        imagesAdapter?.notifyItemRemoved(list.size)
+                    }
+                    response.photos?.let { list.addAll(it) }
+                    refreshData()
+                    if (response.per_page!! < pageNumber * perPage) {
+                        pageNumber += 1
+                    } else {
+                        isLast = true
+                    }
+                    Log.e("response Pexels Photos API: ", it.toString())
+                }
+
+                Status.ERROR -> {
+                    smallToastWithContext(requireContext(), it.localError.toString())
+                }
+
+                else -> {
+                    smallToastWithContext(requireContext(), it.localError.toString())
+                }
+            }
+
+        }
     }
 
     private fun resetQueryParameters() {
@@ -212,7 +247,8 @@ class MainFragment : BaseFragment() {
             ImagesAdapter(
                 glideUtils,
                 list,
-                binding.rvImages
+                binding.rvImages,
+                mContext
             )
         }
         imagesAdapter?.setLoadMoreListener(object : LoadMoreListener {
@@ -230,10 +266,31 @@ class MainFragment : BaseFragment() {
         })
         imagesAdapter?.setOnItemClickListener(object : OnItemClickedListener {
             override fun onItemClicked(position: Int) {
-                smallToastWithContext(requireContext(), "image clicked")
+                Log.e("Image item clicked", "Navigate to full screen activity")
+                val intent = Intent(mActivity, FullScreenImageActivity::class.java)
+                poweredBy = sharedPref.getInt(POWERED_BY)
+                if (poweredBy == POWERED_BY_PEXELS) {
+                    if (list[position] is PexelsPhotos) {
+                        val photos: PexelsPhotos? = list[position] as PexelsPhotos?
+                        intent.putExtra(Constants.KEY_PREVIEW_IMAGE_LINK, photos?.src?.original)
+                        intent.putExtra(Constants.KEY_LARGE_IMAGE_LINK, photos?.src?.original)
+                        intent.putExtra(Constants.KEY_IMAGE_ID, photos?.id.toString())
+
+                    } else Log.e("TAG", "onItemClicked pexels: ${list[position]}")
+                } else {
+                    if (list[position] is Hit) {
+                        val hit: Hit? = list[position] as Hit?
+                        intent.putExtra(Constants.KEY_PREVIEW_IMAGE_LINK, hit?.webformatURL)
+                        intent.putExtra(Constants.KEY_LARGE_IMAGE_LINK, hit?.largeImageURL)
+                        intent.putExtra(Constants.KEY_IMAGE_ID, hit?.id.toString())
+
+                    } else Log.e("TAG", "onItemClicked pexelsModels: ${list[position]}")
+                }
+                startActivity(intent)
             }
 
             override fun onSubItemClicked(position: Int, subPosition: Int) {
+
             }
         })
         binding.rvImages.adapter = imagesAdapter
@@ -267,6 +324,15 @@ class MainFragment : BaseFragment() {
 
     private fun getImagesFromPexels(shouldShowProgressBar: Boolean) {
         if (shouldShowProgressBar) binding.progressBar.visibility = View.VISIBLE
+        viewModelMain.getImagesPexels(
+            authKey = Constants.AUTHORIZATION_KEY,
+            query = imageCategory!!.lowercase(Locale.getDefault()),
+            imageType = "photo",
+            pretty = true,
+            page = pageNumber,
+            per_page = perPage
+        )
+
     }
 
     private fun refreshData() {

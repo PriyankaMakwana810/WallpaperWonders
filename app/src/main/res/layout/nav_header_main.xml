@@ -12,6 +12,7 @@
             android:src="@drawable/ic_drawer_header_bg" />
 
         <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/changePoweredBy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"

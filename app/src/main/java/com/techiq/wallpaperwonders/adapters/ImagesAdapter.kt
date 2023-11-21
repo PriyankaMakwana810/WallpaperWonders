@@ -1,5 +1,7 @@
 package com.techiq.wallpaperwonders.adapters
 
+import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,14 +13,18 @@ import com.techiq.wallpaperwonders.databinding.RowFooterLoadingBinding
 import com.techiq.wallpaperwonders.databinding.RowImageBinding
 import com.techiq.wallpaperwonders.interfaces.LoadMoreListener
 import com.techiq.wallpaperwonders.interfaces.OnItemClickedListener
+import com.techiq.wallpaperwonders.model.response.pexels.images.PexelsPhotos
 import com.techiq.wallpaperwonders.model.response.pixabay.Hit
+import com.techiq.wallpaperwonders.utils.Constants
 import com.techiq.wallpaperwonders.utils.GlideUtils
 import com.techiq.wallpaperwonders.utils.OnScrollListener
+import com.techiq.wallpaperwonders.utils.PrefUtils
 
 class ImagesAdapter(
     glideUtils: GlideUtils,
     private val dataSet: List<Any?>,
     recyclerView: RecyclerView,
+    mContext: Context,
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder?>() {
     private var isLoading = false
     private val visibleThreshold = 1
@@ -29,9 +35,11 @@ class ImagesAdapter(
     private val ROW_PROG = 1
     var onItemClickedListener: OnItemClickedListener? = null
     private val glideUtils: GlideUtils
+    var sharedPref: PrefUtils
 
     init {
         this.glideUtils = glideUtils
+        sharedPref = PrefUtils(mContext)
         val linearLayoutManager = recyclerView.layoutManager as LinearLayoutManager
         recyclerView.addOnScrollListener(object : OnScrollListener(linearLayoutManager) {
             override fun loadMore() {
@@ -75,30 +83,21 @@ class ImagesAdapter(
         return when (viewType) {
             ROW_PROG -> {
                 val mBinder: RowFooterLoadingBinding = DataBindingUtil.inflate(
-                    LayoutInflater.from(parent.context),
-                    R.layout.row_footer_loading,
-                    parent,
-                    false
+                    LayoutInflater.from(parent.context), R.layout.row_footer_loading, parent, false
                 )
                 ProgressViewHolder(mBinder)
             }
 
             ROW_ITEM -> {
                 val mBinder: RowImageBinding = DataBindingUtil.inflate(
-                    LayoutInflater.from(parent.context),
-                    R.layout.row_image,
-                    parent,
-                    false
+                    LayoutInflater.from(parent.context), R.layout.row_image, parent, false
                 )
                 MyViewHolder(mBinder)
             }
 
             else -> {
                 val mBinder: RowImageBinding = DataBindingUtil.inflate(
-                    LayoutInflater.from(parent.context),
-                    R.layout.row_image,
-                    parent,
-                    false
+                    LayoutInflater.from(parent.context), R.layout.row_image, parent, false
                 )
                 MyViewHolder(mBinder)
             }
@@ -107,10 +106,16 @@ class ImagesAdapter(
 
     override fun onBindViewHolder(viewHolder: RecyclerView.ViewHolder, position: Int) {
         if (viewHolder is MyViewHolder) {
-            val previewURL =
-                (dataSet[position] as Hit?)!!.webformatURL!!.replace("_640", "_340")
-
-            glideUtils.loadImage(previewURL, (viewHolder).mBinder.ivImage)
+            val poweredBy = sharedPref.getInt(Constants.POWERED_BY)
+            val previewURL: String
+            if (poweredBy == Constants.POWERED_BY_PIXABAY) {
+                previewURL = (dataSet[position] as Hit?)!!.webformatURL!!.replace("_640", "_340")
+                Log.e("TAG", "onBindViewHolder: $")
+            } else {
+                previewURL =
+                    (dataSet[position] as PexelsPhotos?)!!.src.large.replace("_640", "_340")
+            }
+            glideUtils.loadImageRecyclerView(previewURL, (viewHolder).mBinder.ivImage)
         }
     }
 

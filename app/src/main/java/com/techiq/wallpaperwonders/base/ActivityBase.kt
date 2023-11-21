@@ -15,6 +15,7 @@ import com.techiq.wallpaperwonders.utils.Constant.INTENT_LOGIN_PASSWORD
 import com.techiq.wallpaperwonders.utils.Constant.INTENT_LOGIN_USER_NAME
 import com.techiq.wallpaperwonders.utils.Constant.SHARED_COMMON
 import com.techiq.wallpaperwonders.utils.Constant.logE
+import com.techiq.wallpaperwonders.utils.GlideUtils
 import com.techiq.wallpaperwonders.utils.PrefUtils
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -27,6 +28,10 @@ open class ActivityBase : DataBindingActivity() {
     @Inject
     @Named(SHARED_COMMON)
     lateinit var sharedPref: PrefUtils
+
+    @Inject
+    @Named(Constant.SHARED_GLIDE)
+    lateinit var glideUtils: GlideUtils
 
     private fun initBaseComponants() {
     }

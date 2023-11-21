@@ -27,6 +27,7 @@ class MainViewModel @Inject constructor(
     val parentView: ObservableField<View> = ObservableField()
     private val _pixabayImagesResponse: MutableLiveData<ApiState> = MutableLiveData()
     private val _pexelsCollectionResponse: MutableLiveData<ApiState> = MutableLiveData()
+    private val _pexelsImagesResponse: MutableLiveData<ApiState> = MutableLiveData()
     val pixabayImagesResponse: LiveData<ApiState>
         get() {
             return _pixabayImagesResponse
@@ -35,7 +36,10 @@ class MainViewModel @Inject constructor(
         get() {
             return _pexelsCollectionResponse
         }
-
+    val pexelsImagesResponse: LiveData<ApiState>
+        get() {
+            return _pexelsImagesResponse
+        }
     fun getPixabayImages(
         key: String?,
         category: String?,
@@ -49,7 +53,7 @@ class MainViewModel @Inject constructor(
         order: String?,
     ) {
         viewModelScope.launch {
-            Log.e("TAG", "getPixabayImages: API CALL", )
+            Log.e("TAG", "getPixabayImages: API CALL")
 
             val response = repository.getImagesPixabay(
                 parent = parentView.get(),
@@ -72,6 +76,37 @@ class MainViewModel @Inject constructor(
                     "getApiStateResponseStatus: " + "inside viewModel" + response.response.toString()
                 )
                 _pixabayImagesResponse.postValue(response)
+            }
+        }
+    }
+
+    fun getImagesPexels(
+        authKey: String?,
+        query: String?,
+        imageType: String?,
+        pretty: Boolean?,
+        page: Int?,
+        per_page: Int?,
+    ) {
+        viewModelScope.launch {
+            val response = repository.getImagesPexels(
+                parent = parentView.get(),
+                isSuccessMessageShow = false,
+                isFailureMessageShow = true,
+                authKey = authKey,
+                query = query,
+                imageType = imageType,
+                pretty = pretty,
+                page = page,
+                per_page = per_page
+            )
+            launch {
+                Log.d(
+                    "TAG",
+                    "getApiStateResponseStatus: " + "inside viewModel" + response.response.toString()
+                )
+                Constant.dismissProgress(parentView.get()!!.context)
+                _pexelsImagesResponse.postValue(response)
             }
         }
     }

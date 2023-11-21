@@ -8,7 +8,7 @@
     <color name="colorSecondary_CCF4D35E">#CCF4D35E</color>
     <color name="colorSecondaryLight">#80F4D35E</color>
     <color name="colorPrimaryDark">#000000</color>
-    <color name="colorPrimaryDark_80000000">#80FFFFFF</color>
+    <color name="colorPrimaryDark_80000000">#80000000</color>
 
     <color name="transparent_30">#30000000</color>
 

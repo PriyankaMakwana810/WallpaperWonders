@@ -5,6 +5,7 @@ import com.techiq.wallpaperwonders.model.request.RegisterationRequest
 import com.techiq.wallpaperwonders.model.response.Register.RegisterResponse
 import com.techiq.wallpaperwonders.model.response.SignIn.SigninResponse
 import com.techiq.wallpaperwonders.model.response.pexels.collection.CollectionResponse
+import com.techiq.wallpaperwonders.model.response.pexels.images.PexelsImagesResponse
 import com.techiq.wallpaperwonders.model.response.pixabay.PixabayImagesResponse
 import com.techiq.wallpaperwonders.utils.Constant.SERVICE_WITH_GSON_SIGNIN
 import com.techiq.wallpaperwonders.utils.Constant.SERVICE_WITH_PEXELS
@@ -51,6 +52,9 @@ class ApiClient @Inject constructor(
             safesearch = safesearch,
             order = order
         )
+    }
+    suspend fun getImagesPexels(authKey: String?, query: String?,imageType:String?,pretty: Boolean?,page: Int?,per_page: Int?): Response<PexelsImagesResponse>{
+        return pexelsInterface.getImagesPexels(authKey,query,imageType,pretty,page,per_page)
     }
     suspend fun getCollectionPexels(
         authKey: String? = Constants.AUTHORIZATION_KEY,

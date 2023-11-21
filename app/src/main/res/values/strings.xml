@@ -50,5 +50,8 @@
     <string name="pixabay">Pixabay</string>
     <string name="pexels">Pexels</string>
     <string name="vertical">vertical</string>
+    <string name="downloading_wallpaper_please_wait">Downloading wallpaper, please wait..</string>
+    <string name="home_lock_screen"><![CDATA[Home & Lock Screen]]></string>
+    <string name="home_screen">Home Screen</string>
 
 </resources>

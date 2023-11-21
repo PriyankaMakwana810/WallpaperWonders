@@ -35,7 +35,7 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".FullScreenImageActivity"
+            android:name=".design.fullscreen.FullScreenImageActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
@@ -61,6 +61,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <service android:name=".service.DownloadService" />
+        <provider
+            android:name=".utils.GenericFileProvider"
+            android:authorities="com.techiq.wallpaperwonders.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/external_files" />
+        </provider>
     </application>
 
 </manifest>

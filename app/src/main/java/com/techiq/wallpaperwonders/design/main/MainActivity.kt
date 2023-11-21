@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AlertDialog
 import androidx.core.view.GravityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.techiq.wallpaperwonders.R
@@ -57,6 +58,32 @@ class MainActivity : ActivityBase() {
         setSupportActionBar(binding.toolbar.toolbar)
         setUpNavigationDrawer()
 
+        binding.navigationView.navHeaderMain.changePoweredBy.setOnClickListener {
+            val builder: AlertDialog.Builder = AlertDialog.Builder(this)
+            builder.setTitle("Choose Your Content From Following Options:")
+                .setSingleChoiceItems(
+                    arrayOf("Pixabay", "Pexels"), sharedPref.getInt(POWERED_BY)
+                ) { dialog, item ->
+                    when (item) {
+                        0 -> {
+                            dialog.dismiss()
+                            sharedPref.putInt(POWERED_BY, POWERED_BY_PIXABAY)
+                            setUpNavigationDrawer()
+                            binding.drawerLayout.closeDrawer(GravityCompat.START)
+                        }
+
+                        1 -> {
+                            dialog.dismiss()
+                            sharedPref.putInt(POWERED_BY, POWERED_BY_PEXELS)
+                            setUpNavigationDrawer()
+                            binding.drawerLayout.closeDrawer(GravityCompat.START)
+                        }
+                    }
+                }
+            val dialog: AlertDialog = builder.create()
+            dialog.show()
+
+        }
         binding.navigationView.navHeaderMain.ivShareApp.setOnClickListener {
             try {
                 val i = Intent(Intent.ACTION_SEND)
@@ -141,7 +168,6 @@ class MainActivity : ActivityBase() {
     }
 
     override fun onBackPress() {
-        super.onBackPress()
         if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
             binding.drawerLayout.closeDrawer(GravityCompat.START)
         } else {
@@ -163,6 +189,7 @@ class MainActivity : ActivityBase() {
                 e.printStackTrace()
             }
         }
+        super.onBackPress()
     }
 
     private fun setObservers() {
@@ -172,17 +199,19 @@ class MainActivity : ActivityBase() {
                 Status.SUCCESS -> {
                     val response = it.response as CollectionResponse
 //                    smallToast(it.response.toString())
-                    Log.e("TAG", "setObservers: Collections ${it.response}" )
+                    Log.e("TAG", "setObservers: Collections ${it.response}")
                     list = response.collections as ArrayList<CollectionItem>
-                    collectionList = list.map {item -> item.title }
-                    collectionIdList = list.map {item -> item.id }
+                    collectionList = list.map { item -> item.title }
+                    collectionIdList = list.map { item -> item.id }
                     Log.e("TAG", "setObservers:$collectionList ")
                     Log.e("TAG", "setObservers: $collectionIdList")
                     setUpNavigationDrawer()
                 }
+
                 Status.ERROR -> {
                     smallToast(it.localError.toString())
                 }
+
                 else -> {
                     smallToast(it.localError.toString())
                 }
@@ -218,7 +247,7 @@ class MainActivity : ActivityBase() {
                         pexelsList[position].subMenu!![subPosition!!]
                     )
 //                    videoFragment.arguments = bundle
-//                    pushFragment(videoFragment, false)
+//                    pushFragment(videoFragment, false)L
                 }
 
                 position == 3 -> {

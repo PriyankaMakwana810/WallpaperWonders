@@ -73,6 +73,46 @@ class MainRepository @Inject constructor(
         )
     }
 
+    suspend fun getImagesPexels(
+        parent: View?,
+        isSuccessMessageShow: Boolean,
+        isFailureMessageShow: Boolean,
+        authKey: String? = Constants.AUTHORIZATION_KEY,
+        query: String?,
+        imageType: String?,
+        pretty: Boolean?,
+        page: Int?,
+        per_page: Int?,
+    ): ApiState {
+        val responseData: ResponseState?
+        if (Constant.isNetWork(parent!!.context)) {
+            val response =
+                apiClient.getImagesPexels(authKey, query, imageType, pretty, page, per_page)
+            val responseBody = response.body()
+
+            val responseMessage =
+                response.message() ?: NetworkConstants.ErrorMsg.SOMETHING_WENT_WRONG
+            responseData =
+                ResponseState(
+                    apiStatus = response.code(),
+                    message = response.body(),
+                    response = response,
+                    responseBody = responseBody,
+                    parentView = parent,
+                    isFailureMessageShow = isFailureMessageShow,
+                    isSuccessMessageShow = isSuccessMessageShow
+                )
+        } else
+            responseData =
+                ResponseState(
+                    parentView = parent,
+                    isNetworkAvailable = false
+                )
+        return getApiStateResponseStatus(
+            responseData, prefUtils
+        )
+    }
+
     suspend fun getCollectionPexels(
         parent: View?,
         isSuccessMessageShow: Boolean,

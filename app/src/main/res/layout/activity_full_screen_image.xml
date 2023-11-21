@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/bg_main_gradiant"
-        tools:context=".FullScreenImageActivity">
+        tools:context=".design.fullscreen.FullScreenImageActivity">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/ivImage"
@@ -45,7 +45,7 @@
                 android:layout_gravity="start|bottom"
                 android:layout_marginVertical="@dimen/_8sdp"
                 android:padding="@dimen/_10sdp"
-                app:srcCompat="@drawable/v_ic_back_arrow" />
+                app:srcCompat="@drawable/baseline_arrow_back" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/ivShare"
@@ -71,7 +71,7 @@
                 android:background="@color/colorPrimaryDark_80000000"
                 android:fontFamily="@font/poppins_bold"
                 android:text="@string/set"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textSize="@dimen/_12sdp" />
 
             <androidx.appcompat.widget.AppCompatButton
@@ -82,7 +82,7 @@
                 android:background="@color/colorPrimaryDark_80000000"
                 android:fontFamily="@font/poppins_bold"
                 android:text="@string/download"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textSize="@dimen/_12sdp" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
