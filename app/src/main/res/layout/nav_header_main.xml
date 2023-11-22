@@ -6,10 +6,9 @@
         android:layout_height="@dimen/_130sdp">
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop"
-            android:src="@drawable/ic_drawer_header_bg" />
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:src="@drawable/bg_gradiant_secondory" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/changePoweredBy"

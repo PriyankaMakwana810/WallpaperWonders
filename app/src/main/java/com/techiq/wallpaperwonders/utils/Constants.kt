@@ -71,6 +71,7 @@ object Constants {
         }
     }
 
+
     object Pixabay {
         fun getPixabayList(): ArrayList<String> {
             val listNavigationItems = ArrayList<String>()

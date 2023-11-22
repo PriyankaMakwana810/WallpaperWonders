@@ -29,4 +29,5 @@ open class BaseFragment : Fragment() {
         mContext = context
         mActivity = context as Activity
     }
+
 }

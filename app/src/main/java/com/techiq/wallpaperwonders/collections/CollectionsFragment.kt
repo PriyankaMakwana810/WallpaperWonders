@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
+import com.techiq.wallpaperwonders.R
 import com.techiq.wallpaperwonders.adapters.CollectionsAdapter
 import com.techiq.wallpaperwonders.base.BaseFragment
 import com.techiq.wallpaperwonders.databinding.FragmentCollectionsBinding
@@ -108,26 +109,6 @@ class CollectionsFragment : BaseFragment() {
             }
 
         }
-        /*        viewModel.collectionMediaData.observe(viewLifecycleOwner) {
-                    viewModel.isLoading.value = false
-                    if (it != null) {
-                        binding?.progressBar?.visibility = View.GONE
-                        if (list.size != 0) {
-                            list.removeAt(list.size - 1)
-                            collectionAdapter?.notifyItemRemoved(list.size)
-                        }
-                        it.media.let { list.addAll(it) }
-                        refreshData()
-                        if (it.per_page < pageNumber * perPage) {
-                            pageNumber += 1
-                        } else {
-                            isLast = true
-                        }
-                        Log.e("onAuthenticateButtonClick: ", it.toString())
-                    } else {
-                        showToastShort("error while getting data!!")
-                    }
-                }*/
     }
 
     private fun resetQueryParameters() {
@@ -200,16 +181,31 @@ class CollectionsFragment : BaseFragment() {
 
 
     private fun getCollectionFromPexels(shouldShowProgressBar: Boolean) {
+        if (!Constant.isWifiConnectedWithInternet(requireContext())) {
 
-        if (shouldShowProgressBar) binding.progressBar.visibility = View.VISIBLE
-        viewModelMain.getCollectionByIdPexels(
-            collectionCategory,
-            Constants.AUTHORIZATION_KEY,
-            true,
-            1,
-            80
-        )
-
+            if (shouldShowProgressBar) binding.progressBar.visibility = View.VISIBLE
+            viewModelMain.getCollectionByIdPexels(
+                collectionCategory,
+                Constants.AUTHORIZATION_KEY,
+                true,
+                1,
+                80
+            )
+        } else {
+            if (Constant.isInternetAvailable(requireContext())) {
+                if (shouldShowProgressBar) binding.progressBar.visibility = View.VISIBLE
+                viewModelMain.getCollectionByIdPexels(
+                    collectionCategory,
+                    Constants.AUTHORIZATION_KEY,
+                    true,
+                    1,
+                    80
+                )
+            } else Constant.smallToastWithContext(
+                requireContext(),
+                getString(R.string.no_internet_connection)
+            )
+        }
     }
 
 

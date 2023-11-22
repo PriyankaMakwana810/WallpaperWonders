@@ -144,7 +144,10 @@ class MainViewModel @Inject constructor(
                     "TAG",
                     "getApiStateResponseStatus: " + "inside viewModel" + response.response.toString()
                 )
-                Constant.dismissProgress(parentView.get()!!.context)
+                Constant.dismissProgress(
+                    parentView.get()!!
+                        .context
+                )
                 _pexelsVideosResponse.postValue(response)
             }
         }

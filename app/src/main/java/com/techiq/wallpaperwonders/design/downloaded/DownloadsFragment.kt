@@ -30,6 +30,7 @@ import com.techiq.wallpaperwonders.utils.Constants
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
 import java.util.Arrays
+import java.util.Locale
 import java.util.Objects
 
 
@@ -153,7 +154,15 @@ class DownloadsFragment : BaseFragment() {
             mBinder.rvImages.visibility = View.VISIBLE
             mBinder.llError.visibility = View.GONE
             mBinder.rvImages.layoutManager = GridLayoutManager(mActivity, 3)
-            adapter = DownloadedWallpapersAdapter(glideUtils, files!!)
+            val jpgFiles: List<File> = files?.filter { file ->
+                // Filter only files with .jpg extension
+                file.extension.lowercase(Locale.ROOT) == "jpg"
+            } ?: emptyList()
+            if (sharedPref.getInt(Constants.POWERED_BY) == Constants.POWERED_BY_PIXABAY){
+                adapter = DownloadedWallpapersAdapter(glideUtils, jpgFiles.toTypedArray())
+            }else{
+                adapter = DownloadedWallpapersAdapter(glideUtils, files!!)
+            }
             mBinder.rvImages.adapter = adapter
             adapter!!.setOnItemClickListener(object : OnItemClickedListener {
                 override fun onItemClicked(position: Int) {

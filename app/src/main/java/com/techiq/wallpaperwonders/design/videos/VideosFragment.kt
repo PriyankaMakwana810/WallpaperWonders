@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
+import com.techiq.wallpaperwonders.R
 import com.techiq.wallpaperwonders.adapters.VideosAdapter
 import com.techiq.wallpaperwonders.base.BaseFragment
 import com.techiq.wallpaperwonders.databinding.FragmentVideosBinding
@@ -170,16 +171,34 @@ class VideosFragment : BaseFragment() {
 
 
     private fun getVideosFromPexels(shouldShowProgressBar: Boolean) {
-        if (shouldShowProgressBar) binding.progressBar.visibility = View.VISIBLE
-        viewModelMain.getVideosPexels(
-            AUTHORIZATION_KEY,
-            videoCategory!!,
-            ORIENTATION,
-            SIZE,
-            true,
-            pageNumber,
-            perPage
-        )
+        if (!Constant.isWifiConnectedWithInternet(requireContext())) {
+            if (shouldShowProgressBar) binding.progressBar.visibility = View.VISIBLE
+            viewModelMain.getVideosPexels(
+                AUTHORIZATION_KEY,
+                videoCategory!!,
+                ORIENTATION,
+                SIZE,
+                true,
+                pageNumber,
+                perPage
+            )
+        } else {
+            if (Constant.isInternetAvailable(requireContext())) {
+                if (shouldShowProgressBar) binding.progressBar.visibility = View.VISIBLE
+                viewModelMain.getVideosPexels(
+                    AUTHORIZATION_KEY,
+                    videoCategory!!,
+                    ORIENTATION,
+                    SIZE,
+                    true,
+                    pageNumber,
+                    perPage
+                )
+            } else Constant.smallToastWithContext(
+                requireContext(),
+                getString(R.string.no_internet_connection)
+            )
+        }
     }
 
     private fun refreshData() {

@@ -30,6 +30,8 @@ import com.techiq.wallpaperwonders.model.response.pexels.images.PexelsPhotos
 import com.techiq.wallpaperwonders.model.response.pixabay.Hit
 import com.techiq.wallpaperwonders.model.response.pixabay.PixabayImagesResponse
 import com.techiq.wallpaperwonders.service.Status
+import com.techiq.wallpaperwonders.utils.Constant.isInternetAvailable
+import com.techiq.wallpaperwonders.utils.Constant.isWifiConnectedWithInternet
 import com.techiq.wallpaperwonders.utils.Constant.smallToastWithContext
 import com.techiq.wallpaperwonders.utils.Constants
 import com.techiq.wallpaperwonders.utils.Constants.POWERED_BY
@@ -321,34 +323,73 @@ class MainFragment : BaseFragment() {
         }
 
     private fun getImagesFromPixabay(shouldShowProgressBar: Boolean) {
-        if (shouldShowProgressBar) binding.progressBar.visibility = View.VISIBLE
-        viewModelMain.getPixabayImages(
-            Constants.PIXABAY_API_KEY,
-            imageCategory!!.lowercase(
-                Locale.getDefault()
-            ),
-            true,
-            pageNumber,
-            getString(R.string.vertical),
-            perPage,
-            "photo",
-            "",
-            true,
-            sortType[selectedSortPosition]
-        )
-
-    }
+        if (!isWifiConnectedWithInternet(requireContext())) {
+            if (shouldShowProgressBar) binding.progressBar.visibility = View.VISIBLE
+            viewModelMain.getPixabayImages(
+                Constants.PIXABAY_API_KEY,
+                imageCategory!!.lowercase(
+                    Locale.getDefault()
+                ),
+                true,
+                pageNumber,
+                getString(R.string.vertical),
+                perPage,
+                "photo",
+                "",
+                true,
+                sortType[selectedSortPosition]
+            )
+        }else{
+            if (isInternetAvailable(requireContext())){
+                if (shouldShowProgressBar) binding.progressBar.visibility = View.VISIBLE
+                viewModelMain.getPixabayImages(
+                    Constants.PIXABAY_API_KEY,
+                    imageCategory!!.lowercase(
+                        Locale.getDefault()
+                    ),
+                    true,
+                    pageNumber,
+                    getString(R.string.vertical),
+                    perPage,
+                    "photo",
+                    "",
+                    true,
+                    sortType[selectedSortPosition]
+                )
+            } else smallToastWithContext(
+                requireContext(),
+                getString(R.string.no_internet_connection)
+            )
+        }
+            }
 
     private fun getImagesFromPexels(shouldShowProgressBar: Boolean) {
-        if (shouldShowProgressBar) binding.progressBar.visibility = View.VISIBLE
-        viewModelMain.getImagesPexels(
-            authKey = Constants.AUTHORIZATION_KEY,
-            query = imageCategory!!.lowercase(Locale.getDefault()),
-            imageType = "photo",
-            pretty = true,
-            page = pageNumber,
-            per_page = perPage
-        )
+        if (!isWifiConnectedWithInternet(requireContext())){
+            if (shouldShowProgressBar) binding.progressBar.visibility = View.VISIBLE
+            viewModelMain.getImagesPexels(
+                authKey = Constants.AUTHORIZATION_KEY,
+                query = imageCategory!!.lowercase(Locale.getDefault()),
+                imageType = "photo",
+                pretty = true,
+                page = pageNumber,
+                per_page = perPage
+            )
+        }else{
+            if (isInternetAvailable(requireContext())){
+                viewModelMain.getImagesPexels(
+                    authKey = Constants.AUTHORIZATION_KEY,
+                    query = imageCategory!!.lowercase(Locale.getDefault()),
+                    imageType = "photo",
+                    pretty = true,
+                    page = pageNumber,
+                    per_page = perPage
+                )
+            } else smallToastWithContext(
+                requireContext(),
+                getString(R.string.no_internet_connection)
+            )
+        }
+
 
     }
 

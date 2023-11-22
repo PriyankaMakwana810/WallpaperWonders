@@ -48,7 +48,7 @@ class DownloadedWallpapersAdapter(
         }
     }
 
-    fun isImageFile(path: String?): Boolean {
+    private fun isImageFile(path: String?): Boolean {
         val mimeType = URLConnection.guessContentTypeFromName(path)
         return mimeType != null && mimeType.startsWith("image")
     }

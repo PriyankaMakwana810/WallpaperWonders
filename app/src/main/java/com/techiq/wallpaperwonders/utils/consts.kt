@@ -110,6 +110,63 @@ object Constant {
         }
     }
 
+    fun isInternetAvailable(context: Context?): Boolean {
+        var isOnline = false
+        if (context == null) {
+            return false
+        }
+        try {
+            val connectivityManager =
+                context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+            val network = connectivityManager.activeNetwork
+            val capabilities =
+                connectivityManager.getNetworkCapabilities(network)// need ACCESS_NETWORK_STATE permission
+            isOnline =
+                capabilities != null && capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_VALIDATED)
+        } catch (e: java.lang.Exception) {
+            e.printStackTrace()
+        }
+
+        return isOnline
+    }
+
+    fun isWifiConnectedWithInternet(context: Context?): Boolean {
+        if (context == null) {
+            return false
+        }
+
+        val connectivityManager =
+            context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val network = connectivityManager.activeNetwork
+        val capabilities = connectivityManager.getNetworkCapabilities(network)
+        if (capabilities != null) {
+            if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) {
+                return !isInternetAvailableWifi(context)
+            }
+        }
+        return false
+    }
+
+    private fun isInternetAvailableWifi(context: Context?): Boolean {
+        if (context == null) {
+            return false
+        }
+        var isOnline = false
+        try {
+            val connectivityManager =
+                context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+            val network = connectivityManager.activeNetwork
+            val capabilities =
+                connectivityManager.getNetworkCapabilities(network)// need ACCESS_NETWORK_STATE permission
+            isOnline =
+                capabilities != null && capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_VALIDATED)
+        } catch (e: java.lang.Exception) {
+            e.printStackTrace()
+        }
+
+        return isOnline
+    }
+
 
     fun dismissProgress(context: Context) {
 
