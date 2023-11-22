@@ -339,8 +339,8 @@ class MainFragment : BaseFragment() {
                 true,
                 sortType[selectedSortPosition]
             )
-        }else{
-            if (isInternetAvailable(requireContext())){
+        } else {
+            if (isInternetAvailable(requireContext())) {
                 if (shouldShowProgressBar) binding.progressBar.visibility = View.VISIBLE
                 viewModelMain.getPixabayImages(
                     Constants.PIXABAY_API_KEY,
@@ -361,21 +361,12 @@ class MainFragment : BaseFragment() {
                 getString(R.string.no_internet_connection)
             )
         }
-            }
+    }
 
     private fun getImagesFromPexels(shouldShowProgressBar: Boolean) {
-        if (!isWifiConnectedWithInternet(requireContext())){
-            if (shouldShowProgressBar) binding.progressBar.visibility = View.VISIBLE
-            viewModelMain.getImagesPexels(
-                authKey = Constants.AUTHORIZATION_KEY,
-                query = imageCategory!!.lowercase(Locale.getDefault()),
-                imageType = "photo",
-                pretty = true,
-                page = pageNumber,
-                per_page = perPage
-            )
-        }else{
-            if (isInternetAvailable(requireContext())){
+        try {
+            if (!isWifiConnectedWithInternet(requireContext())) {
+                if (shouldShowProgressBar) binding.progressBar.visibility = View.VISIBLE
                 viewModelMain.getImagesPexels(
                     authKey = Constants.AUTHORIZATION_KEY,
                     query = imageCategory!!.lowercase(Locale.getDefault()),
@@ -384,13 +375,25 @@ class MainFragment : BaseFragment() {
                     page = pageNumber,
                     per_page = perPage
                 )
-            } else smallToastWithContext(
-                requireContext(),
-                getString(R.string.no_internet_connection)
-            )
+            } else {
+                if (isInternetAvailable(requireContext())) {
+                    viewModelMain.getImagesPexels(
+                        authKey = Constants.AUTHORIZATION_KEY,
+                        query = imageCategory!!.lowercase(Locale.getDefault()),
+                        imageType = "photo",
+                        pretty = true,
+                        page = pageNumber,
+                        per_page = perPage
+                    )
+                } else smallToastWithContext(
+                    requireContext(),
+                    getString(R.string.no_internet_connection)
+                )
+            }
+        } catch (e: Exception) {
+//            smallToastWithContext(requireContext(), "Something Went Wrong!")
+            Log.e("TAG", "getPhotosFromPexels: ${e.message}")
         }
-
-
     }
 
     private fun refreshData() {

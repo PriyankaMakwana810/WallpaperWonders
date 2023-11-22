@@ -171,19 +171,8 @@ class VideosFragment : BaseFragment() {
 
 
     private fun getVideosFromPexels(shouldShowProgressBar: Boolean) {
-        if (!Constant.isWifiConnectedWithInternet(requireContext())) {
-            if (shouldShowProgressBar) binding.progressBar.visibility = View.VISIBLE
-            viewModelMain.getVideosPexels(
-                AUTHORIZATION_KEY,
-                videoCategory!!,
-                ORIENTATION,
-                SIZE,
-                true,
-                pageNumber,
-                perPage
-            )
-        } else {
-            if (Constant.isInternetAvailable(requireContext())) {
+        try {
+            if (!Constant.isWifiConnectedWithInternet(requireContext())) {
                 if (shouldShowProgressBar) binding.progressBar.visibility = View.VISIBLE
                 viewModelMain.getVideosPexels(
                     AUTHORIZATION_KEY,
@@ -194,11 +183,28 @@ class VideosFragment : BaseFragment() {
                     pageNumber,
                     perPage
                 )
-            } else Constant.smallToastWithContext(
-                requireContext(),
-                getString(R.string.no_internet_connection)
-            )
+            } else {
+                if (Constant.isInternetAvailable(requireContext())) {
+                    if (shouldShowProgressBar) binding.progressBar.visibility = View.VISIBLE
+                    viewModelMain.getVideosPexels(
+                        AUTHORIZATION_KEY,
+                        videoCategory!!,
+                        ORIENTATION,
+                        SIZE,
+                        true,
+                        pageNumber,
+                        perPage
+                    )
+                } else Constant.smallToastWithContext(
+                    requireContext(),
+                    getString(R.string.no_internet_connection)
+                )
+            }
+        } catch (e: Exception) {
+//            Constant.smallToastWithContext(requireContext(), "Something Went Wrong!")
+            Log.e("TAG", "getVideosFromPexels: ${e.message}")
         }
+
     }
 
     private fun refreshData() {

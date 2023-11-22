@@ -168,7 +168,12 @@ class MainActivity : ActivityBase() {
     }
 
     private fun getCollectionList() {
-        viewModelMain.getCollectionPexels(Constants.AUTHORIZATION_KEY, true, 1, 15)
+        try {
+            viewModelMain.getCollectionPexels(Constants.AUTHORIZATION_KEY, true, 1, 15)
+        }catch (e: Exception){
+//            smallToast("Something Went Wrong!")
+            Log.e("TAG", "getCollectionFromPexels: ${e.message}" )
+        }
     }
 
     private val onBackPressedCallback = object : OnBackPressedCallback(true) {
