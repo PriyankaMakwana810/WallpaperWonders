@@ -14,8 +14,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.techiq.wallpaperwonders.R
 import com.techiq.wallpaperwonders.adapters.NavigationDrawerAdapter
 import com.techiq.wallpaperwonders.base.ActivityBase
+import com.techiq.wallpaperwonders.collections.CollectionsFragment
 import com.techiq.wallpaperwonders.databinding.ActivityMainBinding
 import com.techiq.wallpaperwonders.design.downloaded.DownloadsFragment
+import com.techiq.wallpaperwonders.design.videos.VideosFragment
 import com.techiq.wallpaperwonders.interfaces.OnItemClickedListener
 import com.techiq.wallpaperwonders.model.PexelsModel
 import com.techiq.wallpaperwonders.model.response.pexels.collection.CollectionItem
@@ -118,7 +120,7 @@ class MainActivity : ActivityBase() {
             binding.navigationView.navHeaderMain.tvPoweredByLogo.setImageResource(R.drawable.img_pexels_logo)
             binding.navigationView.navHeaderMain.tvPoweredByLogo.visibility = View.VISIBLE
             pexelsList.clear()
-            pexelsList.add(PexelsModel("Download"))
+            pexelsList.add(PexelsModel("Downloads"))
             pexelsList.add(PexelsModel("All Photos", getPexelsPhotos()))
             pexelsList.add(PexelsModel("All Videos", getPexelsVideos()))
             pexelsList.add(PexelsModel("All Collection", collectionList, collectionIdList))
@@ -221,12 +223,14 @@ class MainActivity : ActivityBase() {
 
     private fun pushMainFragment(position: Int, subPosition: Int? = null) {
         val fragment = MainFragment()
+        val videoFragment = VideosFragment()
+        val collectionsFragment = CollectionsFragment()
         val bundle = Bundle()
-        if (position == 0) {
-            pushFragment(DownloadsFragment(), false)
-        }
+
         if (poweredBy == POWERED_BY_PIXABAY) {
-            if (listNavigationItems[position].equals("all", ignoreCase = true)) {
+            if (position == 0) {
+                pushFragment(DownloadsFragment(), false)
+            } else if (listNavigationItems[position].equals("all", ignoreCase = true)) {
                 bundle.putString(
                     Constants.KEY_IMAGE_CATEGORY,
                     ""
@@ -240,14 +244,18 @@ class MainActivity : ActivityBase() {
             }
         } else {
             when {
+                position == 0 -> {
+                    pushFragment(DownloadsFragment(), false)
+                }
+
                 position == 2 -> {
 //                    for videos
                     bundle.putString(
                         Constants.KEY_VIDEO_CATEGORY,
                         pexelsList[position].subMenu!![subPosition!!]
                     )
-//                    videoFragment.arguments = bundle
-//                    pushFragment(videoFragment, false)L
+                    videoFragment.arguments = bundle
+                    pushFragment(videoFragment, false)
                 }
 
                 position == 3 -> {
@@ -256,8 +264,8 @@ class MainActivity : ActivityBase() {
                         Constants.KEY_COLLECTION_CATEGORY,
                         pexelsList[position].subId!![subPosition!!]
                     )
-//                    collectionsFragment.arguments = bundle
-//                    pushFragment(collectionsFragment, false)
+                    collectionsFragment.arguments = bundle
+                    pushFragment(collectionsFragment, false)
                 }
 
                 subPosition == null -> {

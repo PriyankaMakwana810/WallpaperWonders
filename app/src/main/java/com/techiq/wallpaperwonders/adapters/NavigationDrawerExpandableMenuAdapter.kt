@@ -48,7 +48,7 @@ class NavigationDrawerExpandableMenuAdapter(
         }
         holder.mBinder.tvItem.setTextColor(
             ContextCompat.getColor(
-                mContext, R.color.white
+                mContext, R.color.black
             )
         )
     }

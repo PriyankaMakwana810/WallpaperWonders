@@ -9,24 +9,23 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.techiq.wallpaperwonders.R
 import java.io.File
+
 @GlideModule
 class GlideUtils(private val context: Context) {
-    
-    fun loadCircleImage(image: String?, imageView: ImageView?) {
+    fun loadImage(image: String?, imageView: ImageView?) {
         val options: RequestOptions = RequestOptions()
-            .centerCrop()
             .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
-            .placeholder(R.drawable.ic_placeholder)
+            .placeholder(R.drawable.v_ic_loader)
             .error(R.drawable.ic_placeholder)
+            .timeout(8000)
             .priority(Priority.NORMAL)
         Glide.with(context)
             .load(image)
             .apply(options)
-            .apply(RequestOptions.circleCropTransform())
+            .centerCrop()
             .into(imageView!!)
     }
-
-    fun loadImage(image: String?, imageView: ImageView?) {
+    fun loadImageRecyclerView(image: String?, imageView: ImageView?) {
         val options: RequestOptions = RequestOptions()
             .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
             .placeholder(R.drawable.ic_placeholder)

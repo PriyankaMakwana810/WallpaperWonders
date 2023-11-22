@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/bg_main_gradiant"
-        tools:context=".design.fullscreen.FullScreenImageActivity">
+        tools:context=".design.fullscreen.FullScreenViewActivity">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/ivImage"

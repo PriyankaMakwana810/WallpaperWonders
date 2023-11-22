@@ -113,6 +113,46 @@ class MainRepository @Inject constructor(
         )
     }
 
+    suspend fun getVideosPexels(
+        parent: View?,
+        isSuccessMessageShow: Boolean,
+        isFailureMessageShow: Boolean,
+        authKey: String?,
+        query: String?,
+        orientation: String?,
+        size: String,
+        pretty: Boolean?,
+        page: Int?,
+        per_page: Int?,
+    ): ApiState {
+        val responseData: ResponseState?
+        if (Constant.isNetWork(parent!!.context)) {
+            val response =
+                apiClient.getVideosPexels(authKey, query, orientation, size, pretty, page, per_page)
+            val responseBody = response.body()
+            val responseMessage =
+                response.message() ?: NetworkConstants.ErrorMsg.SOMETHING_WENT_WRONG
+            responseData =
+                ResponseState(
+                    apiStatus = response.code(),
+                    message = response.body(),
+                    response = response,
+                    responseBody = responseBody,
+                    parentView = parent,
+                    isFailureMessageShow = isFailureMessageShow,
+                    isSuccessMessageShow = isSuccessMessageShow
+                )
+        } else
+            responseData =
+                ResponseState(
+                    parentView = parent,
+                    isNetworkAvailable = false
+                )
+        return getApiStateResponseStatus(
+            responseData, prefUtils
+        )
+    }
+
     suspend fun getCollectionPexels(
         parent: View?,
         isSuccessMessageShow: Boolean,
@@ -126,6 +166,42 @@ class MainRepository @Inject constructor(
         if (Constant.isNetWork(parent!!.context)) {
             val response = apiClient.getCollectionPexels(
                 authKey, pretty, page, per_page
+            )
+            val responseBody = response.body()
+
+            val responseMessage =
+                response.message() ?: NetworkConstants.ErrorMsg.SOMETHING_WENT_WRONG
+            responseData =
+                ResponseState(
+                    apiStatus = response.code(),
+                    message = response.body(),
+                    response = response,
+                    responseBody = responseBody,
+                    parentView = parent,
+                    isFailureMessageShow = isFailureMessageShow,
+                    isSuccessMessageShow = isSuccessMessageShow
+                )
+        } else
+            responseData =
+                ResponseState(
+                    parentView = parent,
+                    isNetworkAvailable = false
+                )
+        return getApiStateResponseStatus(
+            responseData, prefUtils
+        )
+    }
+
+    suspend fun getCollectionByIdPexels(
+        parent: View?,
+        isSuccessMessageShow: Boolean,
+        isFailureMessageShow: Boolean,
+        collectionId: String?, authKey: String?, pretty: Boolean?, page: Int?, per_page: Int?,
+    ): ApiState {
+        val responseData: ResponseState?
+        if (Constant.isNetWork(parent!!.context)) {
+            val response = apiClient.getCollectionByIdPexels(
+                collectionId, authKey, pretty, page, per_page
             )
             val responseBody = response.body()
 

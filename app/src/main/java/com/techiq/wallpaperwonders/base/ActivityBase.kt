@@ -81,13 +81,17 @@ open class ActivityBase : DataBindingActivity() {
         }
     }
 
-    fun pushFragment(fragment: Fragment, addToBackStack: Boolean) {
-        false.pushFragment(fragment, addToBackStack)
+    fun pushFragment(fragment: Fragment) {
+        pushFragment(fragment, false)
     }
 
-    private fun Boolean.pushFragment(fragment: Fragment, addToBackStack: Boolean) {
+    fun pushFragment(fragment: Fragment, addToBackStack: Boolean) {
+        pushFragment(fragment, false, addToBackStack)
+    }
+
+    private fun pushFragment(fragment: Fragment, clearBackStack: Boolean, addToBackStack: Boolean) {
         val manager: FragmentManager = supportFragmentManager
-        if (this && manager.backStackEntryCount > 0) {
+        if (clearBackStack && manager.backStackEntryCount > 0) {
             try {
                 manager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
             } catch (e: Exception) {

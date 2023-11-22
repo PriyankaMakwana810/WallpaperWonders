@@ -94,6 +94,14 @@ class NavigationDrawerAdapter(private val mContext: Context, private val dataSet
                         notifyDataSetChanged()
                     } else {
                         when (adapterPosition) {
+                            0 -> {
+                                if (onItemClickedListener != null) onItemClickedListener!!.onItemClicked(
+                                    adapterPosition
+                                )
+                                selectedPosition = adapterPosition
+                                notifyDataSetChanged()
+                            }
+
                             1, 2, 3 -> {
                                 if (!binding.rvSubMenu.isVisible) {
                                     binding.rvSubMenu.visibility = View.VISIBLE

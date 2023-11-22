@@ -74,7 +74,7 @@
     </style>
 
     <style name="Theme.AppTheme.ProgressBarTheme">
-        <item name="colorAccent">@color/white</item> <!-- Whatever color you want-->
+        <item name="colorAccent">@color/black</item> <!-- Whatever color you want-->
     </style>
     <!--    <style name="ShapeAppearance.App.MediumComponent" parent="ShapeAppearance.Material3.MediumComponent">-->
     <!--        <item name="cornerFamily">rounded</item>-->

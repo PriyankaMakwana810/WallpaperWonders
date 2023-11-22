@@ -27,7 +27,9 @@ class MainViewModel @Inject constructor(
     val parentView: ObservableField<View> = ObservableField()
     private val _pixabayImagesResponse: MutableLiveData<ApiState> = MutableLiveData()
     private val _pexelsCollectionResponse: MutableLiveData<ApiState> = MutableLiveData()
+    private val _pexelsCollectionByIdResponse: MutableLiveData<ApiState> = MutableLiveData()
     private val _pexelsImagesResponse: MutableLiveData<ApiState> = MutableLiveData()
+    private val _pexelsVideosResponse: MutableLiveData<ApiState> = MutableLiveData()
     val pixabayImagesResponse: LiveData<ApiState>
         get() {
             return _pixabayImagesResponse
@@ -36,10 +38,19 @@ class MainViewModel @Inject constructor(
         get() {
             return _pexelsCollectionResponse
         }
+    val pexelsCollectionByIdResponse: LiveData<ApiState>
+        get() {
+            return _pexelsCollectionByIdResponse
+        }
     val pexelsImagesResponse: LiveData<ApiState>
         get() {
             return _pexelsImagesResponse
         }
+    val pexelsVideosResponse: LiveData<ApiState>
+        get() {
+            return _pexelsVideosResponse
+        }
+
     fun getPixabayImages(
         key: String?,
         category: String?,
@@ -111,6 +122,39 @@ class MainViewModel @Inject constructor(
         }
     }
 
+    fun getVideosPexels(
+        authKey: String?,
+        query: String?,
+        orientation: String?,
+        size: String,
+        pretty: Boolean?,
+        page: Int?,
+        per_page: Int?,
+    ) {
+        viewModelScope.launch {
+            val response = repository.getVideosPexels(
+                parent = parentView.get(),
+                isSuccessMessageShow = false,
+                isFailureMessageShow = true,
+                authKey = authKey,
+                query = query,
+                orientation = orientation,
+                size = size,
+                pretty = pretty,
+                page = page,
+                per_page = per_page
+            )
+            launch {
+                Log.d(
+                    "TAG",
+                    "getApiStateResponseStatus: " + "inside viewModel" + response.response.toString()
+                )
+                Constant.dismissProgress(parentView.get()!!.context)
+                _pexelsVideosResponse.postValue(response)
+            }
+        }
+    }
+
     fun getCollectionPexels(authKey: String?, pretty: Boolean?, page: Int?, per_page: Int?) {
         viewModelScope.launch {
             val response = repository.getCollectionPexels(
@@ -126,6 +170,35 @@ class MainViewModel @Inject constructor(
                 )
                 Constant.dismissProgress(parentView.get()!!.context)
                 _pexelsCollectionResponse.postValue(response)
+            }
+        }
+    }
+
+    fun getCollectionByIdPexels(
+        collectionId: String?,
+        authKey: String?,
+        pretty: Boolean?,
+        page: Int?,
+        per_page: Int?,
+    ) {
+        viewModelScope.launch {
+            val response = repository.getCollectionByIdPexels(
+                parent = parentView.get(),
+                isSuccessMessageShow = false,
+                isFailureMessageShow = true,
+                collectionId = collectionId,
+                authKey = authKey,
+                pretty = pretty,
+                page = page,
+                per_page = per_page
+            )
+            launch {
+                Log.d(
+                    "TAG",
+                    "getApiStateResponseStatus: " + "inside viewModel" + response.response.toString()
+                )
+                Constant.dismissProgress(parentView.get()!!.context)
+                _pexelsCollectionByIdResponse.postValue(response)
             }
         }
     }

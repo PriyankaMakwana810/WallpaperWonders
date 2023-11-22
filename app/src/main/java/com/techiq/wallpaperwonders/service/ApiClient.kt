@@ -4,8 +4,10 @@ import com.techiq.wallpaperwonders.model.request.LoginRequest
 import com.techiq.wallpaperwonders.model.request.RegisterationRequest
 import com.techiq.wallpaperwonders.model.response.Register.RegisterResponse
 import com.techiq.wallpaperwonders.model.response.SignIn.SigninResponse
+import com.techiq.wallpaperwonders.model.response.pexels.collection.CollectionByIdResponse
 import com.techiq.wallpaperwonders.model.response.pexels.collection.CollectionResponse
 import com.techiq.wallpaperwonders.model.response.pexels.images.PexelsImagesResponse
+import com.techiq.wallpaperwonders.model.response.pexels.videos.PexelsVideosResponse
 import com.techiq.wallpaperwonders.model.response.pixabay.PixabayImagesResponse
 import com.techiq.wallpaperwonders.utils.Constant.SERVICE_WITH_GSON_SIGNIN
 import com.techiq.wallpaperwonders.utils.Constant.SERVICE_WITH_PEXELS
@@ -55,6 +57,12 @@ class ApiClient @Inject constructor(
     }
     suspend fun getImagesPexels(authKey: String?, query: String?,imageType:String?,pretty: Boolean?,page: Int?,per_page: Int?): Response<PexelsImagesResponse>{
         return pexelsInterface.getImagesPexels(authKey,query,imageType,pretty,page,per_page)
+    }
+    suspend fun getVideosPexels(authKey: String? = Constants.AUTHORIZATION_KEY,query: String?,orientation: String?,size: String,pretty: Boolean?,page: Int?,per_page: Int?): Response<PexelsVideosResponse>{
+        return pexelsInterface.getVideosPexels(authKey,query,orientation,size,pretty,page,per_page)
+    }
+    suspend fun getCollectionByIdPexels(collectionId: String?,authKey: String? = Constants.AUTHORIZATION_KEY,pretty: Boolean?,page: Int?,per_page: Int?): Response<CollectionByIdResponse>{
+        return pexelsInterface.getCollectionByIdPexels(collectionId, authKey, pretty, page, per_page)
     }
     suspend fun getCollectionPexels(
         authKey: String? = Constants.AUTHORIZATION_KEY,

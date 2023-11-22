@@ -85,7 +85,7 @@ object Constants {
         fun getPixabayList(): ArrayList<String> {
             val listNavigationItems = ArrayList<String>()
 //            listNavigationItems.clear()
-            listNavigationItems.add("Downloaded")
+            listNavigationItems.add("Downloads")
             listNavigationItems.add("All")
             listNavigationItems.add("Nature")
             listNavigationItems.add("Fashion")

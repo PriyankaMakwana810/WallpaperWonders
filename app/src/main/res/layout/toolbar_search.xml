@@ -28,7 +28,7 @@
             android:inputType="text"
             android:textColor="@color/black"
             android:textColorHint="@color/black"
-            android:textSize="@dimen/_14sdp"
+            android:textSize="@dimen/_12sdp"
             android:fontFamily="@font/poppins_regular"/>
 
     </androidx.appcompat.widget.Toolbar>

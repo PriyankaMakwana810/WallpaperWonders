@@ -16,7 +16,7 @@
             android:fontFamily="@font/poppins_medium"
             android:padding="@dimen/_12sdp"
             android:textColor="@color/black"
-            android:textSize="@dimen/_12sdp"
+            android:textSize="@dimen/_10sdp"
             tools:text="Item" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
