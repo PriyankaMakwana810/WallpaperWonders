@@ -1,32 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <dimen name="default_horizontal_card_padding">16dp</dimen>
-    <dimen name="edt_corner">8dp</dimen>
-
-    <dimen name="text_size_headline1">38sp</dimen>
-    <dimen name="text_size_headline2">36sp</dimen>
-    <dimen name="text_size_headline3">30sp</dimen>
-    <dimen name="text_size_headline4">28sp</dimen>
-    <dimen name="text_size_headline4.5">26sp</dimen>
-    <dimen name="text_size_headline5">24sp</dimen>
-    <dimen name="text_size_headline6">20sp</dimen>
-    <dimen name="text_size_subtitle1">18sp</dimen>
-    <dimen name="text_size_subtitle2">16sp</dimen>
-    <dimen name="text_size_subtitle3">17sp</dimen>
-    <dimen name="text_size_body1">14sp</dimen>
-    <dimen name="text_size_body2">13sp</dimen>
-    <dimen name="text_size_body3">10sp</dimen>
-    <dimen name="text_size_caption">10sp</dimen>
-    <dimen name="text_size_caption1">11sp</dimen>
-    <dimen name="text_size_button">14sp</dimen>
-    <dimen name="text_size_overline">8sp</dimen>
-    <dimen name="body_2_text">16sp</dimen>
-    <dimen name="button_corner_radius">8dp</dimen>
-    <dimen name="sign_in_top_margin">20dp</dimen>
-    <dimen name="margin_horizontal">20dp</dimen>
-
-    <dimen name="subtitle_top_margin">14dp</dimen>
-    <dimen name="button_height">56dp</dimen>
-
 </resources>

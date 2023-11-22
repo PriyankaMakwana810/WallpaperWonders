@@ -4,14 +4,10 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
-import com.techiq.wallpaperwonders.R
 import com.techiq.wallpaperwonders.adapters.CollectionsAdapter
 import com.techiq.wallpaperwonders.base.BaseFragment
 import com.techiq.wallpaperwonders.databinding.FragmentCollectionsBinding
@@ -44,7 +40,6 @@ class CollectionsFragment : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        setHasOptionsMenu(true)
         dataFromBundle
         binding = FragmentCollectionsBinding.inflate(inflater, container, false)
         dataFromBundle
@@ -80,28 +75,6 @@ class CollectionsFragment : BaseFragment() {
                 e.printStackTrace()
             }
         }
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        setObservers()
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.main, menu)
-        val item1 = menu.findItem(R.id.action_search)
-        item1.isVisible = false
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.action_search -> {
-//                val intent = Intent(mActivity, SearchActivity::class.java)
-//                startActivity(intent)
-            }
-        }
-        return super.onOptionsItemSelected(item)
     }
 
     private fun setObservers() {

@@ -2,10 +2,6 @@ package com.techiq.wallpaperwonders.utils
 
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-
-/**
- * Created by RajeshKushvaha on 27-04-17
- */
 abstract class OnScrollListener(linearLayoutManager: LinearLayoutManager) :
     RecyclerView.OnScrollListener() {
     private var isLast = false

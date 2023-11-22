@@ -52,12 +52,6 @@
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".design.register.RegisterActivity"
-            android:exported="false" />
-        <activity
-            android:name=".design.signin.SigninActivity"
-            android:exported="false" />
-        <activity
             android:name=".design.splash.SplashActivity"
             android:exported="true"
             android:screenOrientation="portrait"

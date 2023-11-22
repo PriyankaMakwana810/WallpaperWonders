@@ -1,28 +1,19 @@
 package com.techiq.wallpaperwonders.design.videos
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.ContextThemeWrapper
-import android.view.Gravity
 import android.view.LayoutInflater
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.widget.PopupMenu
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
-import com.techiq.wallpaperwonders.R
 import com.techiq.wallpaperwonders.adapters.VideosAdapter
 import com.techiq.wallpaperwonders.base.BaseFragment
 import com.techiq.wallpaperwonders.databinding.FragmentVideosBinding
 import com.techiq.wallpaperwonders.design.fullscreen.FullScreenViewActivity
 import com.techiq.wallpaperwonders.design.main.MainActivity
 import com.techiq.wallpaperwonders.design.main.MainViewModel
-import com.techiq.wallpaperwonders.design.search.SearchActivity
 import com.techiq.wallpaperwonders.interfaces.LoadMoreListener
 import com.techiq.wallpaperwonders.interfaces.OnItemClickedListener
 import com.techiq.wallpaperwonders.model.response.pexels.videos.PexelsVideosResponse
@@ -47,14 +38,12 @@ class VideosFragment : BaseFragment() {
     var videosAdapter: VideosAdapter? = null
     var index = 21
     var isLast = false
-    var selectedSortPosition = 0
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        setHasOptionsMenu(true)
         binding = FragmentVideosBinding.inflate(inflater, container, false)
         dataFromBundle
         binding.apply {
@@ -93,74 +82,6 @@ class VideosFragment : BaseFragment() {
                 e.printStackTrace()
             }
         }
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.main, menu)
-        val item1 = menu.findItem(R.id.action_search)
-        item1.isVisible = false
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.action_search -> {
-                val intent = Intent(mActivity, SearchActivity::class.java)
-                startActivity(intent)
-            }
-
-            R.id.action_sort -> {
-                val itemView = mActivity.findViewById<View>(R.id.action_sort)
-                val wrapper: Context = ContextThemeWrapper(mActivity, R.style.MyPopupTheme)
-                val popup = PopupMenu(
-                    wrapper,
-                    itemView!!,
-                    Gravity.END or Gravity.TOP,
-                    0,
-                    R.style.MyPopupTheme
-                )
-                val inflater: MenuInflater = popup.menuInflater
-                inflater.inflate(R.menu.popup_menu, popup.menu)
-                popup.menu.getItem(selectedSortPosition).isChecked = true
-                popup.setOnMenuItemClickListener(object :
-                    android.widget.PopupMenu.OnMenuItemClickListener,
-                    PopupMenu.OnMenuItemClickListener {
-
-                    override fun onMenuItemClick(item: MenuItem): Boolean {
-                        when (item.itemId) {
-                            R.id.popular -> if (selectedSortPosition != 0) {
-                                selectedSortPosition = 0
-                                try {
-                                    resetQueryParameters()
-                                    if (poweredBy == Constants.POWERED_BY_PEXELS) {
-                                        videoCategory = "popular"
-                                        getVideosFromPexels(true)
-                                    }
-                                } catch (e: Exception) {
-                                    e.printStackTrace()
-                                }
-                            }
-
-                            R.id.latest -> if (selectedSortPosition != 1) {
-                                selectedSortPosition = 1
-                                try {
-                                    resetQueryParameters()
-                                    if (poweredBy == Constants.POWERED_BY_PEXELS) {
-                                        videoCategory = "latest"
-                                        getVideosFromPexels(true)
-                                    }
-                                } catch (e: Exception) {
-                                    e.printStackTrace()
-                                }
-                            }
-                        }
-                        return true
-                    }
-                })
-                popup.show()
-            }
-        }
-        return super.onOptionsItemSelected(item)
     }
 
     private fun setObservers() {

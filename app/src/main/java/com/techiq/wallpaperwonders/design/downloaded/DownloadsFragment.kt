@@ -57,12 +57,12 @@ class DownloadsFragment : BaseFragment() {
         savedInstanceState: Bundle?,
     ): View {
         // Inflate the layout for this fragment
-        setHasOptionsMenu(false)
         mBinder = FragmentDownloadedBinding.inflate(inflater, container, false)
         prepareLayout()
         return mBinder.root
     }
 
+    // Function to recursively delete files and directories
     private fun deleteRecursive(fileOrDirectory: File) {
         if (fileOrDirectory.isDirectory) for (child in fileOrDirectory.listFiles()!!) deleteRecursive(
             child
@@ -74,6 +74,7 @@ class DownloadsFragment : BaseFragment() {
         setData()
     }
 
+    // Function to set up the layout
     private fun prepareLayout() {
         if (hasPermissions(requireContext(), permissions)) {
             setData()
@@ -82,6 +83,7 @@ class DownloadsFragment : BaseFragment() {
         }
     }
 
+    // Permission request launcher
     private val permReqLauncher =
         registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
             val granted = permissions.entries.all {
@@ -95,6 +97,7 @@ class DownloadsFragment : BaseFragment() {
             }
         }
 
+    // Function to check if permissions are granted
     private fun hasPermissions(context: Context, permissions: Array<String>): Boolean =
         permissions.all {
             ActivityCompat.checkSelfPermission(context, it) == PackageManager.PERMISSION_GRANTED
@@ -185,7 +188,7 @@ class DownloadsFragment : BaseFragment() {
         }
     }
 
-    private val activityResultLauncher = registerForActivityResult<Intent, ActivityResult>(
+    private val activityResultLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) { result: ActivityResult ->
         if (result.resultCode == Activity.RESULT_OK) {

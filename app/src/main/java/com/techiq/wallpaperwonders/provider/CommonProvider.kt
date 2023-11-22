@@ -11,7 +11,6 @@ import com.techiq.wallpaperwonders.service.NetworkConstants
 import com.techiq.wallpaperwonders.utils.Constant
 import com.techiq.wallpaperwonders.utils.Constant.SHARED_COMMON
 import com.techiq.wallpaperwonders.utils.Constant.SHARED_GLIDE
-import com.techiq.wallpaperwonders.utils.Constants
 import com.techiq.wallpaperwonders.utils.GlideUtils
 import com.techiq.wallpaperwonders.utils.PrefUtils
 import dagger.Module
@@ -97,7 +96,7 @@ object CommonProvider {
         @Named(Constant.OK_HTTPS) okHttpClient: OkHttpClient,
         @Named(Constant.GSON) gson: Gson,
     ): ApiInterface {
-        return Retrofit.Builder().baseUrl(Constants.KEY_PIXABAY_LINK).client(okHttpClient)
+        return Retrofit.Builder().baseUrl(NetworkConstants.ApiUrl.PIXABAY_URL).client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create(gson)).build()
             .create(ApiInterface::class.java)
     }
@@ -109,7 +108,7 @@ object CommonProvider {
         @Named(Constant.OK_HTTPS) okHttpClient: OkHttpClient,
         @Named(Constant.GSON) gson: Gson,
     ): ApiInterface {
-        return Retrofit.Builder().baseUrl(Constants.KEY_PEXELS_LINK).client(okHttpClient)
+        return Retrofit.Builder().baseUrl(NetworkConstants.ApiUrl.PEXELS_URL).client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create(gson)).build()
             .create(ApiInterface::class.java)
     }

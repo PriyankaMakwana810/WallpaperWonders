@@ -1,7 +1,6 @@
 package com.techiq.wallpaperwonders.base
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
@@ -9,12 +8,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.techiq.wallpaperwonders.R
-import com.techiq.wallpaperwonders.design.signin.SigninActivity
 import com.techiq.wallpaperwonders.utils.Constant
-import com.techiq.wallpaperwonders.utils.Constant.INTENT_LOGIN_PASSWORD
-import com.techiq.wallpaperwonders.utils.Constant.INTENT_LOGIN_USER_NAME
 import com.techiq.wallpaperwonders.utils.Constant.SHARED_COMMON
-import com.techiq.wallpaperwonders.utils.Constant.logE
 import com.techiq.wallpaperwonders.utils.GlideUtils
 import com.techiq.wallpaperwonders.utils.PrefUtils
 import dagger.hilt.android.AndroidEntryPoint
@@ -40,31 +35,6 @@ open class ActivityBase : DataBindingActivity() {
         super.onCreate(savedInstanceState)
         initBaseComponants()
 
-    }
-
-    fun logout(
-        isDataClearOnly: Boolean? = false, userName: String? = null, password: String? = null,
-    ) {
-        sharedPref.logout()
-
-        logE(tagName, "logout: normal logout")
-        if (isDataClearOnly == null || isDataClearOnly == false) {
-            val intent = Intent(this, SigninActivity::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-            intent.putExtra(Constant.LOGOUT_SCREEN, Constant.LOGOUT)
-
-            if (userName != null && password != null) {
-                intent.putExtra(INTENT_LOGIN_USER_NAME, userName)
-                intent.putExtra(INTENT_LOGIN_PASSWORD, password)
-            }
-            startActivity(intent)
-            finishAffinity()
-        }
-    }
-
-    open fun onBackPress() {
-        finish()
     }
 
     fun showSoftKeyboard(editText: EditText?) {

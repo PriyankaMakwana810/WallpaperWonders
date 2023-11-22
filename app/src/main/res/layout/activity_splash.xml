@@ -13,7 +13,7 @@
             android:id="@+id/ivAppIcon"
             android:layout_width="@dimen/_100sdp"
             android:layout_height="@dimen/_100sdp"
-            android:src="@mipmap/ic_launcher" />
+            android:src="@mipmap/ic_launcher_round" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"

@@ -5,10 +5,8 @@
     <string name="set">Set</string>
     <string name="download">Download</string>
     <string name="search">Search</string>
-    <string name="portrait">Portrait</string>
     <string name="full_hd_s">Full HD, %s</string>
     <string name="full_hd">Full HD</string>
-    <string name="landscape">Landscape</string>
     <string name="delete">Delete</string>
     <string name="lock_screen">Lock Screen</string>
     <string name="powered_by">Powered By</string>
@@ -22,33 +20,11 @@
     <string name="something_is_broken_n_please_try_again">Something is broken\n tap here to try again</string>
 
 
-    <string name="briefcase_sampleapp">ISellIt</string>
-    <string name="lets_get_started">Let\'s get started</string>
-    <string name="username">Username</string>
-    <string name="password_placeholder">Password</string>
-    <string name="sign_in">Login</string>
-
-    <string name="email_address">Email Address</string>
-    <string name="password">Password</string>
-    <string name="login">Login</string>
-    <string name="register">Register</string>
     <string name="progress">Progress</string>
-    <string name="downloadingProgress">Download in Progress</string>
-    <string name="waitingForNetwork">Waiting for Network</string>
 
-    <string name="pleaseEnterUsername">Please Enter Username</string>
-    <string name="pleaseEnterPincode">Please Enter Password</string>
     <string name="cancel_download">Cancel Download</string>
     <string name="app_will_restart_in_5_sec">App will Restart in 5 sec</string>
-    <string name="wrongCredential">Wrong Credential</string>
-    <string name="permission_denied">Permission is Denied.</string>
-    <string name="all_media_access">All Media Access!</string>
-    <string name="you_have_to_grant_us_your_device_media_access">You have to grant us your device Media Access</string>
-    <string name="app_media_settings">App Media Settings</string>
-    <string name="your_device_version_not_need_for_this_permission">Your Device Version not need for this permission</string>
     <string name="unable_to_search_n_please_try_with_different_keyword">Unable to search \n Please try with different keyword</string>
-    <string name="pixabay">Pixabay</string>
-    <string name="pexels">Pexels</string>
     <string name="vertical">vertical</string>
     <string name="downloading_wallpaper_please_wait">Downloading wallpaper, please wait..</string>
     <string name="home_lock_screen"><![CDATA[Home & Lock Screen]]></string>

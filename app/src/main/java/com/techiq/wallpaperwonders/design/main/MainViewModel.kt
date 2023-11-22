@@ -4,7 +4,6 @@ import android.util.Log
 import android.view.View
 import androidx.databinding.Observable
 import androidx.databinding.ObservableField
-import androidx.databinding.PropertyChangeRegistry
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -12,17 +11,13 @@ import androidx.lifecycle.viewModelScope
 import com.techiq.wallpaperwonders.repository.main.MainRepository
 import com.techiq.wallpaperwonders.service.ApiState
 import com.techiq.wallpaperwonders.utils.Constant
-import com.techiq.wallpaperwonders.utils.PrefUtils
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-import javax.inject.Named
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
     val repository: MainRepository,
-    private val propertyChangeRegistry: PropertyChangeRegistry,
-    @Named(Constant.SHARED_COMMON) private val sharedPreferences: PrefUtils,
 ) : ViewModel(), Observable {
     val parentView: ObservableField<View> = ObservableField()
     private val _pixabayImagesResponse: MutableLiveData<ApiState> = MutableLiveData()

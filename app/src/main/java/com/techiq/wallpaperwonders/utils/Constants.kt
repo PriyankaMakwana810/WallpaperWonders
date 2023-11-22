@@ -11,13 +11,7 @@ object Constants {
     const val FROM = "from"
     const val KEY_IMAGE_ID = "image_id"
 
-    const val KEY_SET_WALLPAPER_COUNT = "set_wallpaper_sount"
-    const val KEY_DOWNLOAD_WALLPAPER_COUNT = "download_wallpaper_sount"
-    const val KEY_HOME_SCREEN_VISITED_COUNT = "home_screen_visited_count"
-    const val KEY_PIXABAY_LINK = "https://pixabay.com/"
-    const val KEY_PEXELS_LINK = "https://api.pexels.com/"
     const val PIXABAY_API_KEY = "38431804-1c9201a3537e9066943244f83"
-    const val TAPPX_KEY = "Pub-41981-Android-1384"
 
     const val POWERED_BY = "PrefPoweredBy"
     const val POWERED_BY_PIXABAY = 0
@@ -26,15 +20,11 @@ object Constants {
 
     const val ORIENTATION = "portrait"
     const val SIZE = "large"
-    const val MEDIA_TYPE = "type"
     const val AUTHORIZATION_KEY = "EZmQhJgvdWvdZWmNM2uxPcWLBvNmwmM97eO0Vc2X7k18RdCrDtthcJ79"
     const val KEY_VIDEO_CATEGORY = "video_category"
     const val KEY_VIDEO_ID = "video_id"
     const val PREF_VIDEO_URI = "videoUri"
     const val KEY_VIDEO_LINK = "video_link"
-    const val PREF_WALLPAPER = "wallpaper_pref"
-    const val SINGLE_ITEM = "single_item"
-    const val MULTIPLE_ITEM = "multiple_item"
 
 
     object PexelsPhotos {

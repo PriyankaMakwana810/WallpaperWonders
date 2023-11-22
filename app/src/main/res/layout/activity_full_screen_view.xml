@@ -45,7 +45,7 @@
                 android:layout_gravity="start|bottom"
                 android:layout_marginVertical="@dimen/_8sdp"
                 android:padding="@dimen/_10sdp"
-                app:srcCompat="@drawable/baseline_arrow_back" />
+                app:srcCompat="@drawable/v_ic_back_arrow" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/ivShare"
@@ -72,13 +72,14 @@
                 android:fontFamily="@font/poppins_bold"
                 android:text="@string/set"
                 android:textColor="@color/white"
+                android:layout_marginVertical="@dimen/_2sdp"
                 android:textSize="@dimen/_12sdp" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnDownload"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_2sdp"
+                android:layout_marginVertical="@dimen/_2sdp"
                 android:background="@color/colorPrimaryDark_80000000"
                 android:fontFamily="@font/poppins_bold"
                 android:text="@string/download"

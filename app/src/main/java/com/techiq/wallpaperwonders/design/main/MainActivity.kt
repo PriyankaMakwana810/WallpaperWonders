@@ -6,6 +6,7 @@ import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import android.view.View
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
@@ -59,6 +60,7 @@ class MainActivity : ActivityBase() {
         getCollectionList()
         setSupportActionBar(binding.toolbar.toolbar)
         setUpNavigationDrawer()
+        onBackPressedDispatcher.addCallback(this,onBackPressedCallback)
 
         binding.navigationView.navHeaderMain.changePoweredBy.setOnClickListener {
             val builder: AlertDialog.Builder = AlertDialog.Builder(this)
@@ -169,29 +171,32 @@ class MainActivity : ActivityBase() {
         viewModelMain.getCollectionPexels(Constants.AUTHORIZATION_KEY, true, 1, 15)
     }
 
-    override fun onBackPress() {
-        if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
-            binding.drawerLayout.closeDrawer(GravityCompat.START)
-        } else {
-            try {
-                if (supportFragmentManager.backStackEntryCount <= 1) {
-                    if (doubleBackToExitPressedOnce) {
-                        finish()
-                        return
+    private val onBackPressedCallback = object : OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+            //showing dialog and then closing the application..
+            if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
+                binding.drawerLayout.closeDrawer(GravityCompat.START)
+            } else {
+                try {
+                    if (supportFragmentManager.backStackEntryCount <= 1) {
+                        if (doubleBackToExitPressedOnce) {
+                            finish()
+                            return
+                        }
+                        doubleBackToExitPressedOnce = true
+                        longToast(getString(R.string.prompt_exit))
+                        Handler(Looper.getMainLooper()).postDelayed({
+                            doubleBackToExitPressedOnce = false
+                        }, 2000)
+                    } else {
+                        supportFragmentManager.popBackStack()
                     }
-                    doubleBackToExitPressedOnce = true
-                    longToast(getString(R.string.prompt_exit))
-                    Handler(Looper.getMainLooper()).postDelayed({
-                        doubleBackToExitPressedOnce = false
-                    }, 2000)
-                } else {
-                    supportFragmentManager.popBackStack()
+                } catch (e: Exception) {
+                    e.printStackTrace()
                 }
-            } catch (e: Exception) {
-                e.printStackTrace()
             }
+
         }
-        super.onBackPress()
     }
 
     private fun setObservers() {

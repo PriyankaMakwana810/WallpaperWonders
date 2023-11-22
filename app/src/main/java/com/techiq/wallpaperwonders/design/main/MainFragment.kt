@@ -12,7 +12,10 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.recyclerview.widget.GridLayoutManager
 import com.techiq.wallpaperwonders.R
 import com.techiq.wallpaperwonders.adapters.ImagesAdapter
@@ -62,7 +65,6 @@ class MainFragment : BaseFragment() {
         savedInstanceState: Bundle?,
     ): View {
         binding = FragmentMainBinding.inflate(inflater, container, false)
-        setHasOptionsMenu(true)
         dataFromBundle
         binding.apply {
             viewModelMain.parentView.set((activity as MainActivity).binding.parentView)
@@ -72,75 +74,86 @@ class MainFragment : BaseFragment() {
         return binding.root
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.main, menu)
-    }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val menuHost: MenuHost = requireActivity()
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.action_search -> {
-                val intent = Intent(mActivity, SearchActivity::class.java)
-                startActivity(intent)
+        menuHost.addMenuProvider(object : MenuProvider {
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                // Add menu items here
+                menuInflater.inflate(R.menu.main, menu)
             }
 
-            R.id.action_sort -> {
-                val itemView = mActivity.findViewById<View>(R.id.action_sort)
-                val wrapper: Context = ContextThemeWrapper(mActivity, R.style.MyPopupTheme)
-                val popup = androidx.appcompat.widget.PopupMenu(
-                    wrapper,
-                    itemView!!,
-                    Gravity.END or Gravity.TOP,
-                    0,
-                    R.style.MyPopupTheme
-                )
-                val inflater: MenuInflater = popup.menuInflater
-                inflater.inflate(R.menu.popup_menu, popup.menu)
-                popup.menu.getItem(selectedSortPosition).isChecked = true
-                popup.setOnMenuItemClickListener(object :
-                    android.widget.PopupMenu.OnMenuItemClickListener,
-                    androidx.appcompat.widget.PopupMenu.OnMenuItemClickListener {
-                    override fun onMenuItemClick(item: MenuItem): Boolean {
-                        when (item.itemId) {
-                            R.id.popular -> if (selectedSortPosition != 0) {
-                                selectedSortPosition = 0
-                                try {
-                                    resetQueryParameters()
-                                    if (poweredBy == POWERED_BY_PEXELS) {
-                                        imageCategory = "popular"
-                                        getImagesFromPexels(true)
-                                    } else {
-                                        imageCategory = "popular"
-                                        getImagesFromPixabay(true)
-                                    }
-                                } catch (e: Exception) {
-                                    e.printStackTrace()
-                                }
-                            }
-
-                            R.id.latest -> if (selectedSortPosition != 1) {
-                                selectedSortPosition = 1
-                                try {
-                                    resetQueryParameters()
-                                    if (poweredBy == POWERED_BY_PEXELS) {
-                                        imageCategory = "latest"
-                                        getImagesFromPexels(true)
-                                    } else {
-                                        imageCategory = "latest"
-                                        getImagesFromPixabay(true)
-                                    }
-                                } catch (e: Exception) {
-                                    e.printStackTrace()
-                                }
-                            }
-                        }
-                        return true
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                // Handle the menu selection
+                return when (menuItem.itemId) {
+                    R.id.action_search -> {
+                        val intent = Intent(mActivity, SearchActivity::class.java)
+                        startActivity(intent)
+                        true
                     }
-                })
-                popup.show()
+
+                    R.id.action_sort -> {
+                        val itemView = mActivity.findViewById<View>(R.id.action_sort)
+                        val wrapper: Context = ContextThemeWrapper(mActivity, R.style.MyPopupTheme)
+                        val popup = androidx.appcompat.widget.PopupMenu(
+                            wrapper,
+                            itemView!!,
+                            Gravity.END or Gravity.TOP,
+                            0,
+                            R.style.MyPopupTheme
+                        )
+                        val inflater: MenuInflater = popup.menuInflater
+                        inflater.inflate(R.menu.popup_menu, popup.menu)
+                        popup.menu.getItem(selectedSortPosition).isChecked = true
+                        popup.setOnMenuItemClickListener(object :
+                            android.widget.PopupMenu.OnMenuItemClickListener,
+                            androidx.appcompat.widget.PopupMenu.OnMenuItemClickListener {
+                            override fun onMenuItemClick(item: MenuItem): Boolean {
+                                when (item.itemId) {
+                                    R.id.popular -> if (selectedSortPosition != 0) {
+                                        selectedSortPosition = 0
+                                        try {
+                                            resetQueryParameters()
+                                            if (poweredBy == POWERED_BY_PEXELS) {
+                                                imageCategory = "popular"
+                                                getImagesFromPexels(true)
+                                            } else {
+                                                imageCategory = "popular"
+                                                getImagesFromPixabay(true)
+                                            }
+                                        } catch (e: Exception) {
+                                            e.printStackTrace()
+                                        }
+                                    }
+
+                                    R.id.latest -> if (selectedSortPosition != 1) {
+                                        selectedSortPosition = 1
+                                        try {
+                                            resetQueryParameters()
+                                            if (poweredBy == POWERED_BY_PEXELS) {
+                                                imageCategory = "latest"
+                                                getImagesFromPexels(true)
+                                            } else {
+                                                imageCategory = "latest"
+                                                getImagesFromPixabay(true)
+                                            }
+                                        } catch (e: Exception) {
+                                            e.printStackTrace()
+                                        }
+                                    }
+                                }
+                                return true
+                            }
+                        })
+                        popup.show()
+                        true
+                    }
+
+                    else -> false
+                }
             }
-        }
-        return super.onOptionsItemSelected(item)
+        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
     }
 
     private fun fetchImages(shouldShowProgressBar: Boolean) {

@@ -32,7 +32,7 @@ import androidx.core.content.FileProvider
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.techiq.wallpaperwonders.R
 import com.techiq.wallpaperwonders.base.ActivityBase
-import com.techiq.wallpaperwonders.databinding.ActivityFullScreenImageBinding
+import com.techiq.wallpaperwonders.databinding.ActivityFullScreenViewBinding
 import com.techiq.wallpaperwonders.databinding.DialogWallpaperTypeChooserBinding
 import com.techiq.wallpaperwonders.service.DownloadService
 import com.techiq.wallpaperwonders.service.VideoLiveWallpaperService
@@ -47,7 +47,7 @@ import java.util.Objects
 class FullScreenViewActivity : ActivityBase(), View.OnClickListener {
 
     // View binding
-    val binding: ActivityFullScreenImageBinding by binding(R.layout.activity_full_screen_image)
+    val binding: ActivityFullScreenViewBinding by binding(R.layout.activity_full_screen_view)
 
     // Variables for image details and download status
     private var previewImageLink: String? = null
@@ -143,6 +143,7 @@ class FullScreenViewActivity : ActivityBase(), View.OnClickListener {
         }
         progressDialog = createProgressDialog()
         if (isImageDownloaded || isVideoDownloaded) {
+            binding.btnDownload.visibility = View.GONE
             binding.btnDownload.setText(R.string.delete)
             binding.btnDownload.setTextColor(ContextCompat.getColor(this, R.color.red))
         }
@@ -611,7 +612,6 @@ class FullScreenViewActivity : ActivityBase(), View.OnClickListener {
         super.onPause()
         if (videoLink != null) {
             Log.e("onPause: ", "on pause video called")
-//            stopPosition = mBinder.ivVideo.currentPosition
             binding.ivVideo.pause()
         }
     }

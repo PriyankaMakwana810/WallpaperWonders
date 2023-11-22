@@ -64,7 +64,7 @@ class DownloadedWallpapersAdapter(
 
         override fun onClick(v: View) {
             when (v.id) {
-                R.id.ivVideo -> onItemClickedListener.onItemClicked(
+                R.id.ivVideo ->if (onItemClickedListener != null) onItemClickedListener.onItemClicked(
                     adapterPosition
                 )
             }

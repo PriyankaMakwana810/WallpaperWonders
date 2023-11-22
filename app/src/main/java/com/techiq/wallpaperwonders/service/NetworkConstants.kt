@@ -22,8 +22,8 @@ object NetworkConstants {
 
         //  const val SIGNIN_URL = "https://dummyjson.com/"
         const val SIGNIN_URL = "http://restapi.adequateshop.com/api/authaccount/"
-        private var pixabayURL: String = "http://pixabay.com/"
-        private var pexelsURL: String = "https://api.pexels.com/"
+        const val PIXABAY_URL: String = "http://pixabay.com/"
+        const val PEXELS_URL: String = "https://api.pexels.com/"
 
 
     }

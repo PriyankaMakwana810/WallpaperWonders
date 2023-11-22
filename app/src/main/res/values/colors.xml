@@ -5,74 +5,27 @@
     <color name="colorPrimary_CC006C67">#CC006C67</color>
     <color name="colorPrimaryLight">#80006C67</color>
     <color name="colorSecondary">#F4D35E</color>
-    <color name="colorSecondary_CCF4D35E">#CCF4D35E</color>
     <color name="colorSecondaryLight">#80F4D35E</color>
     <color name="colorPrimaryDark">#000000</color>
     <color name="colorPrimaryDark_80000000">#80000000</color>
 
     <color name="transparent_30">#30000000</color>
 
-    <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">@color/blue_shade</color>
-    <color name="purple_700">@color/blue_shade</color>
-    <color name="teal_200">#FF018786</color>
-    <color name="teal_700">#FF018786</color>
-
 
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="toolbarWhite">#ffffff</color>
     <color name="menu_white">#FFFFFF</color>
 
     <color name="progressBackgroundColor">#99cccccc</color>
     <color name="progress_gray">#B2B2B2</color>
 
-    <color name="pink">#ef79b6</color>
-    <color name="blue">#52bdeb</color>
-    <color name="textColor">#FF3700B3</color>
-
-    <color name="textColor_5">#0A20163A</color>
-    <color name="textColor_40">#4D20163A</color>
-    <color name="editTextErrorColor">@color/red</color>
     <color name="red">#FF0000</color>
-    <color name="green">#00FF00</color>
-    <color name="yellow">#FFFF00</color>
-    <color name="transparent">#00000000</color>
-    <color name="buttonTextColor">@color/white</color>
-    <color name="gray_500">#9E9E9E</color>
-    <color name="gray_600">#757575</color>
-    <color name="grey_500">#949494</color>
-    <color name="spinner_outline">#a9a8aa</color>
     <color name="blue_shade">#0074B7</color>
-    <color name="navy_blue">#003B73</color>
-    <color name="navy_blue_1">#003060</color>
-    <color name="baby_blue">#BFD7ED</color>
-    <color name="darkerColor">#4F6367</color>
 
     <!-- Green shades -->
-    <color name="green_50">#E8F5E9</color>
-    <color name="green_100">#C8E6C9</color>
-    <color name="green_200">#A5D6A7</color>
-    <color name="green_300">#81C784</color>
-    <color name="green_400">#66BB6A</color>
-    <color name="green_500">#4CAF50</color>
-    <color name="green_600">#43A047</color>
-    <color name="green_700">#388E3C</color>
-    <color name="green_800">#2E7D32</color>
-    <color name="green_900">#1B5E20</color>
 
 
     <!-- Red shades -->
-    <color name="red_50">#FFEBEE</color>
-    <color name="red_100">#FFCDD2</color>
-    <color name="red_200">#EF9A9A</color>
-    <color name="red_300">#E57373</color>
-    <color name="red_400">#EF5350</color>
-    <color name="red_500">#F44336</color>
-    <color name="red_600">#E53935</color>
-    <color name="red_700">#D32F2F</color>
-    <color name="red_800">#C62828</color>
-    <color name="red_900">#B71C1C</color>
 
 </resources>
