@@ -93,9 +93,14 @@ Wallpaper Wonders!
 
 ## **Screenshots**
 
-<img src="screenshots/homeScreen.JPEG" alt="Home Screen" width="260" height="600"/>
-<img src="screenshots/photos.JPEG" alt="Photos" width="260" height="600"/>
-<img src="screenshots/videos.JPEG" alt="Videos" width="260" height="600"/>
-<img src="screenshots/collections.JPEG" alt="Collections" width="260" height="600"/>
-<img src="screenshots/downloads.JPEG" alt="Downloads" width="260" height="600"/>
-<img src="screenshots/setWallpaper.JPEG" alt="Set Wallpaper" width="260" height="600"/>
+<img src="screenshots/1.jpeg" alt="1" width="260" height="600"/>
+<img src="screenshots/2.jpeg" alt="2" width="260" height="600"/>
+<img src="screenshots/3.jpeg" alt="3" width="260" height="600"/>
+<img src="screenshots/4.jpeg" alt="4" width="260" height="600"/>
+<img src="screenshots/5.jpeg" alt="5" width="260" height="600"/>
+<img src="screenshots/6.jpeg" alt="6" width="260" height="600"/>
+<img src="screenshots/7.jpeg" alt="7" width="260" height="600"/>
+<img src="screenshots/8.jpeg" alt="8" width="260" height="600"/>
+<img src="screenshots/9.jpeg" alt="9" width="260" height="600"/>
+<img src="screenshots/10.jpeg" alt="10" width="260" height="600"/>
+<img src="screenshots/11.jpeg" alt="11" width="260" height="600"/>
