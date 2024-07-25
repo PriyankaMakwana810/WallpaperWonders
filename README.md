@@ -1,66 +1,101 @@
-# WallpaperWonders
+# Wallpaper Wonders - Ultimate Wallpaper App
 
+Experience a new level of personalization with Wallpaper Wonders! Our app provides an extensive
+collection of photos and videos from PIXABAY and PEXELS, enabling you to enhance your device’s look
+with stunning wallpapers. Explore, download, and set your favorites as wallpapers with ease.
 
+## **Features**
 
-## Getting started
+🖼️ **Diverse Photo Collection**:
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+- Browse high-quality images from PIXABAY, organized by categories for easy access.
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+🎥 **Expansive Video Library**:
 
-## Add your files
+- Explore a variety of videos from PEXELS, available in different categories.
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
+🌟 **Curated Collections**:
 
-```
-cd existing_repo
-git remote add origin https://github.com/deepandroid/wallpaperwondersapp.git
-git branch -M main
-git push -uf origin main
-```
+- Discover themed photo and video collections from PEXELS, sorted by categories.
 
-# Editing this README
+🖌️ **Set as Wallpaper**:
 
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thanks to [makeareadme.com](https://www.makeareadme.com/) for this template.
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
+- Set any photo or video as your wallpaper for both home and lock screens with just a tap.
 
-## Name
-Choose a self-explaining name for your project.
+📥 **Download and Save**:
 
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
+- Download your preferred photos and videos, and manage them in the Downloads screen.
 
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
+📂 **View Downloaded Wallpapers**:
 
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+- Easily access all your downloaded wallpapers in one place, with an organized view.
 
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
+## **Prerequisites**
 
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
+Before using the app, ensure you have the following:
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+1. **Internet Access**:
+    - A stable internet connection is required to fetch photos and videos from PIXABAY and PEXELS.
 
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
+## **Setup**
 
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
+Follow these steps to set up the Wallpaper Wonders App:
 
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
+1. **Clone the Repository**:
+    - Clone the repository from [GitHub](https://github.com/PriyankaMakwana810/WallpaperWonders.git).
 
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
+2. **Open in Android Studio**:
+    - Open the project in Android Studio.
 
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
+3. **Configure API Keys**:
+    - Obtain API keys from [PIXABAY](https://pixabay.com/api/docs/)
+      and [PEXELS](https://www.pexels.com/api/).
+    - Add your API keys in the `Constants.kt` file:
+      ```properties
+      PIXABAY_API_KEY=your_pixabay_api_key
+      AUTHORIZATION_KEY(PEXELS_API_KEY)=your_pexels_api_key
+      ```
 
-## License
-For open source projects, say how it is licensed.
+4. **Build and Run**:
+    - Build and run the app on an Android emulator or device.
 
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+## **Usage**
+
+1. **Home Screen**:
+    - The home screen features a bottom navigation bar with options for Photos, Videos, Collections,
+      and Downloads.
+    - Photos: Browse high-quality images from PIXABAY.
+    - Videos: Explore engaging videos from PEXELS.
+    - Collections: Discover curated collections from PEXELS.
+    - Downloads: View all your downloaded wallpapers.
+
+2. **Setting a Wallpaper**:
+    - Tap on a photo or video to open its detail view.
+    - Tap the "Set as Wallpaper" button and choose to apply it to the home screen, lock screen, or
+      both.
+
+3. **Managing Downloads**:
+    - Access your downloaded wallpapers in the Downloads screen for easy reapplication or removal.
+
+## **Dependencies**
+
+- [Kotlin](https://kotlinlang.org/) for app development
+- [Retrofit](https://square.github.io/retrofit/) for API integration
+- [Glide](https://github.com/bumptech/glide) for image loading
+- [ExoPlayer](https://exoplayer.dev/) for video playback
+
+## **Notes**
+
+Ensure that you have a stable internet connection for fetching and downloading wallpapers.
+
+Feel free to reach out with any feedback or suggestions. Enjoy customizing your device with
+Wallpaper Wonders!
+
+## **Screenshots**
+
+<img src="screenshots/homeScreen.JPEG" alt="Home Screen" width="260" height="600"/>
+<img src="screenshots/photos.JPEG" alt="Photos" width="260" height="600"/>
+<img src="screenshots/videos.JPEG" alt="Videos" width="260" height="600"/>
+<img src="screenshots/collections.JPEG" alt="Collections" width="260" height="600"/>
+<img src="screenshots/downloads.JPEG" alt="Downloads" width="260" height="600"/>
+<img src="screenshots/setWallpaper.JPEG" alt="Set Wallpaper" width="260" height="600"/>
